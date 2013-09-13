@@ -5,14 +5,14 @@ then
   echo "=============================================="
   echo "No Optimization "
   echo "=============================================="
-  klee --libc=uclibc --posix-runtime ../$1.bc --sym-arg 3
+  klee --libc=uclibc --posix-runtime --use-cache=false --use-cex-cache=false ../$1.bc --sym-arg 3
   klee-stats --print-all ../klee-last
 
   # with optimization but no flag
   echo "=============================================="
   echo "Empty Optimization, no flag"
   echo "=============================================="
-  klee --libc=uclibc --posix-runtime --optimize ../$1.bc --sym-arg 3
+  klee --libc=uclibc --posix-runtime ---use-cache=false --use-cex-cache=false -optimize ../$1.bc --sym-arg 3
   klee-stats --print-all ../klee-last
 
   #compare different optimizations for one program
@@ -54,7 +54,7 @@ then
     echo "=============================================="
     echo "Optimization with flag: "${OPT}
     echo "=============================================="
-    klee --libc=uclibc --posix-runtime --optimize --opt-flag=${OPT} ../$1.bc --sym-arg 3
+    klee --libc=uclibc --posix-runtime --use-cache=false --use-cex-cache=false --optimize --opt-flag=${OPT} ../$1.bc --sym-arg 3
     klee-stats --print-all ../klee-last
   done
 fi
