@@ -1,8 +1,9 @@
 if [ "$1" == "--clean" ]
 then
   ./compare-optimization.sh --clean
-  rm result*.txt output.txt
 else
-  ./compare-optimization.sh $1 > output.txt
-  ./get-result.py > result-$1.txt
+  ./compare-optimization.sh $1 > output-tr.txt
+  ./compare-optimization-echo.sh echo > output-echo.txt
+  ./get-result.py output-tr.txt > result-tr.txt 
+  ./get-result.py output-echo.txt > result-echo.txt
 fi
