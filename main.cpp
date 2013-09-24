@@ -154,11 +154,6 @@ namespace {
             cl::desc("Directory to write results in (defaults to klee-out-N)"),
             cl::init(""));
 
-//  cl::opt<std::string>
-//  OptFlag("opt-flag",
-//            cl::desc("Optimization flags"),
-//            cl::init(""));
-
   // this is a fake entry, its automagically handled
   cl::list<std::string>
   ReadArgsFilesFake("read-args", 
@@ -1487,13 +1482,14 @@ int main(int argc, char **argv, char **envp) {
     << "KLEE: done: query cex = " << queryCounterexamples << "\n";
 
   std::stringstream stats;
-  // stats << "\n";
-  // stats << "KLEE: done: total instructions = " 
-  //       << instructions << "\n";
-  // stats << "KLEE: done: completed paths = " 
-  //       << handler->getNumPathsExplored() << "\n";
-  // stats << "KLEE: done: generated tests = " 
-  //       << handler->getNumTestCases() << "\n";
+  stats << "\n";
+  stats << "KLEE: done: total instructions = " 
+        << instructions << "\n";
+  stats << "KLEE: done: completed paths = " 
+        << handler->getNumPathsExplored() << "\n";
+  stats << "KLEE: done: generated tests = " 
+        << handler->getNumTestCases() << "\n";
+
   std::cout << stats.str();
   handler->getInfoStream() << stats.str();
 
