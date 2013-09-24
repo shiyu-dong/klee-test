@@ -16,7 +16,6 @@
 //===----------------------------------------------------------------------===//
 
 #include "klee/Config/Version.h"
-#include "llvm/Module.h"
 #include "llvm/PassManager.h"
 #include "llvm/Analysis/Passes.h"
 #include "llvm/Analysis/LoopPass.h"
@@ -27,11 +26,19 @@
 #else
 #include "llvm/Support/DynamicLibrary.h"
 #endif
+
+#if LLVM_VERSION_CODE >= LLVM_VERSION(3, 3)
+#include "llvm/IR/Module.h"
+#include "llvm/IR/DataLayout.h"
+#else
+#include "llvm/Module.h"
 #if LLVM_VERSION_CODE <= LLVM_VERSION(3, 1)
 #include "llvm/Target/TargetData.h"
 #else
 #include "llvm/DataLayout.h"
 #endif
+#endif
+
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/Transforms/IPO.h"
 #include "llvm/Transforms/Scalar.h"
@@ -98,7 +105,6 @@ static inline void addPass(PassManager &PM, Pass *P) {
 namespace llvm {
 
 
-
 static void AddStandardCompilePasses(PassManager &PM) {
   if (!OptFlag.size()) return;
   std::string flag = OptFlag.getValue();
@@ -117,9 +123,9 @@ static void AddStandardCompilePasses(PassManager &PM) {
 
   PM.add(createVerifierPass());                  // Verify that input is correct
 
-// #if LLVM_VERSION_CODE < LLVM_VERSION(3, 0)
-//   addPass(PM, createLowerSetJmpPass());          // Lower llvm.setjmp/.longjmp
-// #endif
+#if LLVM_VERSION_CODE < LLVM_VERSION(3, 0)
+  addPass(PM, createLowerSetJmpPass());          // Lower llvm.setjmp/.longjmp
+#endif
 
   // If the -strip-debug command line option was specified, do it.
   if (StripDebug)
@@ -144,167 +150,231 @@ static void AddStandardCompilePasses(PassManager &PM) {
       addPass(PM, createCFGSimplificationPass()); // Clean up disgusting code
     }
 
-#if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
-    if ((*it).find("CondPropagation") != std::string::npos) {
-      std::cout << "CondPropagation\n";
-      addPass(PM, createCondPropagationPass());      // Propagate conditionals
-    }
-#endif
+ #if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
+     if ((*it).find("CondPropagation") != std::string::npos) {
+       std::cout << "CondPropagation\n";
+       addPass(PM, createCondPropagationPass());      // Propagate conditionals
+     }
+ #endif
+ 
+     if ((*it).find("ConstantMerge") != std::string::npos) {
+       std::cout << "ConstantMerge\n";
+       addPass(PM, createConstantMergePass());        // Merge dup global constants
+     }
+ 
+     if ((*it).find("DeadArgElimination") != std::string::npos) {
+       std::cout << "DeadArgElimination\n";
+       addPass(PM, createDeadArgEliminationPass());   // Dead argument elimination
+     }
+ 
+     if ((*it).find("DeadStoreElimination") != std::string::npos) {
+       std::cout << "DeadStoreElimination\n";
+       addPass(PM, createDeadStoreEliminationPass()); // Delete dead stores
+     }
+ 
+ #if LLVM_VERSION_CODE < LLVM_VERSION(3, 0)
+     if ((*it).find("DeadTypeElimination") != std::string::npos) {
+       std::cout << "DeadTypeElimination\n";
+       addPass(PM, createDeadTypeEliminationPass());  // Eliminate dead types
+     }
+ #endif
+ 
+     if ((*it).find("FunctionAttrs") != std::string::npos) {
+       std::cout << "FunctionAttrs\n";
+       addPass(PM, createFunctionAttrsPass());        // Deduce function attrs
+     }
+ 
+     if (!DisableInline) {
+       if ((*it).find("FunctionInlining") != std::string::npos) {
+         std::cout << "FunctionInlining\n";
+         addPass(PM, createFunctionInliningPass());   // Inline small functions
+       }
+     }
+ 
+     if ((*it).find("GlobalDCE") != std::string::npos) {
+       std::cout << "GlobalDCE\n";
+       addPass(PM, createGlobalDCEPass());            // Remove unused fns and globs
+     }
+ 
+     if ((*it).find("GlobalOptimizer") != std::string::npos) {
+       std::cout << "GlobalOptimizer\n";
+       addPass(PM, createGlobalOptimizerPass());      // Optimize out global vars
+     }
+ 
+     if ((*it).find("GVN") != std::string::npos) {
+       std::cout << "GVN\n";
+       addPass(PM, createGVNPass());                  // Remove redundancies
+     }
+ 
+     if ((*it).find("IndVarSimplify") != std::string::npos) {
+       std::cout << "IndVarSimplify\n";
+       addPass(PM, createIndVarSimplifyPass());       // Canonicalize indvars
+     }
+ 
+     if ((*it).find("InstructionCombining") != std::string::npos) {
+       std::cout << "InstructionCombining\n";
+       addPass(PM, createInstructionCombiningPass()); // Clean up after IPCP & DAE
+     }
+ 
+     if ((*it).find("IPConstantPropagation") != std::string::npos) {
+       std::cout << "IPConstantPropagation\n";
+       addPass(PM, createIPConstantPropagationPass());// IP Constant Propagation
+     }
+ 
+     if ((*it).find("JumpThreading") != std::string::npos) {
+       std::cout << "JumpThreading\n";
+       addPass(PM, createJumpThreadingPass());        // Thread jumps.
+     }
+ 
+     if ((*it).find("LICM") != std::string::npos) {
+       std::cout << "LICM\n";
+       addPass(PM, createLICMPass());                 // Hoist loop invariants
+     }
+ 
+     if ((*it).find("LoopDeletion") != std::string::npos) {
+       std::cout << "LoopDeletion\n";
+       addPass(PM, createLoopDeletionPass());         // Delete dead loops
+     }
+ 
+ #if LLVM_VERSION_CODE < LLVM_VERSION(2, 9)
+     if ((*it).find("LoopIndexSplit") != std::string::npos) {
+       std::cout << "LoopIndexSplit\n";
+       addPass(PM, createLoopIndexSplitPass());       // Index split loops.
+     }
+ #endif
+ 
+     if ((*it).find("LoopRotate") != std::string::npos) {
+       std::cout << "LoopRotate\n";
+       addPass(PM, createLoopRotatePass());
+     }
+ 
+ 
+     if ((*it).find("LoopUnroll") != std::string::npos) {
+       std::cout << "LoopUnroll\n";
+       addPass(PM, createLoopUnrollPass());           // Unroll small loops
+     }
+ 
+     if ((*it).find("LoopUnswitch") != std::string::npos) {
+       std::cout << "LoopUnswitch\n";
+       addPass(PM, createLoopUnswitchPass());         // Unswitch loops.
+     }
+ 
+     if ((*it).find("MemCpyOpt") != std::string::npos) {
+       std::cout << "MemCpyOpt\n";
+       addPass(PM, createMemCpyOptPass());            // Remove memcpy / form memset
+     }
+ 
+     if ((*it).find("PromoteMemoryToRegister") != std::string::npos) {
+       std::cout << "PromoteMemoryToRegister\n";
+       addPass(PM, createPromoteMemoryToRegisterPass()); // Kill useless allocas
+     }
+ 
+     if ((*it).find("PruneEH") != std::string::npos) {
+       std::cout << "PruneEH\n";
+       addPass(PM, createPruneEHPass());              // Remove dead EH info
+     }
+ 
+ #if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
+     if ((*it).find("RaiseAllocation") != std::string::npos) {
+       std::cout << "RaiseAllocation\n";
+       addPass(PM, createRaiseAllocationsPass()); // call %malloc -> malloc inst
+     }
+ #endif
+ 
+     if ((*it).find("Reassociate") != std::string::npos) {
+       std::cout << "Reassociate\n";
+       addPass(PM, createReassociatePass());          // Reassociate expressions
+     }
+ 
+     if ((*it).find("ScalarReplAggregates") != std::string::npos) {
+       std::cout << "ScalarReplAggregates\n";
+       addPass(PM, createScalarReplAggregatesPass()); // Break up aggregate allocas
+     }
+ 
+     if ((*it).find("SCCP") != std::string::npos) {
+       std::cout << "SCCP\n";
+       addPass(PM, createSCCPPass());                 // Constant prop with SCCP
+     }
+ 
+     if ((*it).find("SimplifyLibCalls") != std::string::npos) {
+       std::cout << "SimplifyLibCalls\n";
+       addPass(PM, createSimplifyLibCallsPass());     // Library Call Optimizations
+     }
+ 
+     if ((*it).find("StripDeadPrototypes") != std::string::npos) {
+       std::cout << "StripDeadPrototypes\n";
+       addPass(PM, createStripDeadPrototypesPass());  // Get rid of dead prototypes
+     }
+ 
+     if ((*it).find("TailCallElimination") != std::string::npos) {
+       std::cout << "TailCallElimination\n";
+       addPass(PM, createTailCallEliminationPass());  // Eliminate tail calls
+     }
+   }
 
-    if ((*it).find("ConstantMerge") != std::string::npos) {
-      std::cout << "ConstantMerge\n";
-      addPass(PM, createConstantMergePass());        // Merge dup global constants
-    }
-
-    if ((*it).find("DeadArgElimination") != std::string::npos) {
-      std::cout << "DeadArgElimination\n";
-      addPass(PM, createDeadArgEliminationPass());   // Dead argument elimination
-    }
-
-    if ((*it).find("DeadStoreElimination") != std::string::npos) {
-      std::cout << "DeadStoreElimination\n";
-      addPass(PM, createDeadStoreEliminationPass()); // Delete dead stores
-    }
-
-#if LLVM_VERSION_CODE < LLVM_VERSION(3, 0)
-    if ((*it).find("DeadTypeElimination") != std::string::npos) {
-      std::cout << "DeadTypeElimination\n";
-      addPass(PM, createDeadTypeEliminationPass());  // Eliminate dead types
-    }
-#endif
-
-    if ((*it).find("FunctionAttrs") != std::string::npos) {
-      std::cout << "FunctionAttrs\n";
-      addPass(PM, createFunctionAttrsPass());        // Deduce function attrs
-    }
-
-    if (!DisableInline) {
-      if ((*it).find("FunctionInlining") != std::string::npos) {
-        std::cout << "FunctionInlining\n";
-        addPass(PM, createFunctionInliningPass());   // Inline small functions
-      }
-    }
-
-    if ((*it).find("GlobalDCE") != std::string::npos) {
-      std::cout << "GlobalDCE\n";
-      addPass(PM, createGlobalDCEPass());            // Remove unused fns and globs
-    }
-
-    if ((*it).find("GlobalOptimizer") != std::string::npos) {
-      std::cout << "GlobalOptimizer\n";
-      addPass(PM, createGlobalOptimizerPass());      // Optimize out global vars
-    }
-
-    if ((*it).find("GVN") != std::string::npos) {
-      std::cout << "GVN\n";
-      addPass(PM, createGVNPass());                  // Remove redundancies
-    }
-
-    if ((*it).find("IndVarSimplify") != std::string::npos) {
-      std::cout << "IndVarSimplify\n";
-      addPass(PM, createIndVarSimplifyPass());       // Canonicalize indvars
-    }
-
-    if ((*it).find("InstructionCombining") != std::string::npos) {
-      std::cout << "InstructionCombining\n";
-      addPass(PM, createInstructionCombiningPass()); // Clean up after IPCP & DAE
-    }
-
-    if ((*it).find("IPConstantPropagation") != std::string::npos) {
-      std::cout << "IPConstantPropagation\n";
-      addPass(PM, createIPConstantPropagationPass());// IP Constant Propagation
-    }
-
-    if ((*it).find("JumpThreading") != std::string::npos) {
-      std::cout << "JumpThreading\n";
-      addPass(PM, createJumpThreadingPass());        // Thread jumps.
-    }
-
-    if ((*it).find("LICM") != std::string::npos) {
-      std::cout << "LICM\n";
-      addPass(PM, createLICMPass());                 // Hoist loop invariants
-    }
-
-    if ((*it).find("LoopDeletion") != std::string::npos) {
-      std::cout << "LoopDeletion\n";
-      addPass(PM, createLoopDeletionPass());         // Delete dead loops
-    }
-
-#if LLVM_VERSION_CODE < LLVM_VERSION(2, 9)
-    if ((*it).find("LoopIndexSplit") != std::string::npos) {
-      std::cout << "LoopIndexSplit\n";
-      addPass(PM, createLoopIndexSplitPass());       // Index split loops.
-    }
-#endif
-
-    if ((*it).find("LoopRotate") != std::string::npos) {
-      std::cout << "LoopRotate\n";
-      addPass(PM, createLoopRotatePass());
-    }
-
-
-    if ((*it).find("LoopUnroll") != std::string::npos) {
-      std::cout << "LoopUnroll\n";
-      addPass(PM, createLoopUnrollPass());           // Unroll small loops
-    }
-
-    if ((*it).find("LoopUnswitch") != std::string::npos) {
-      std::cout << "LoopUnswitch\n";
-      addPass(PM, createLoopUnswitchPass());         // Unswitch loops.
-    }
-
-    if ((*it).find("MemCpyOpt") != std::string::npos) {
-      std::cout << "MemCpyOpt\n";
-      addPass(PM, createMemCpyOptPass());            // Remove memcpy / form memset
-    }
-
-    if ((*it).find("PromoteMemoryToRegister") != std::string::npos) {
-      std::cout << "PromoteMemoryToRegister\n";
-      addPass(PM, createPromoteMemoryToRegisterPass()); // Kill useless allocas
-    }
-
-    if ((*it).find("PruneEH") != std::string::npos) {
-      std::cout << "PruneEH\n";
-      addPass(PM, createPruneEHPass());              // Remove dead EH info
-    }
-
-#if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
-    if ((*it).find("RaiseAllocation") != std::string::npos) {
-      std::cout << "RaiseAllocation\n";
-      addPass(PM, createRaiseAllocationsPass()); // call %malloc -> malloc inst
-    }
-#endif
-
-    if ((*it).find("Reassociate") != std::string::npos) {
-      std::cout << "Reassociate\n";
-      addPass(PM, createReassociatePass());          // Reassociate expressions
-    }
-
-    if ((*it).find("ScalarReplAggregates") != std::string::npos) {
-      std::cout << "ScalarReplAggregates\n";
-      addPass(PM, createScalarReplAggregatesPass()); // Break up aggregate allocas
-    }
-
-    if ((*it).find("SCCP") != std::string::npos) {
-      std::cout << "SCCP\n";
-      addPass(PM, createSCCPPass());                 // Constant prop with SCCP
-    }
-
-    if ((*it).find("SimplifyLibCalls") != std::string::npos) {
-      std::cout << "SimplifyLibCalls\n";
-      addPass(PM, createSimplifyLibCallsPass());     // Library Call Optimizations
-    }
-
-    if ((*it).find("StripDeadPrototypes") != std::string::npos) {
-      std::cout << "StripDeadPrototypes\n";
-      addPass(PM, createStripDeadPrototypesPass());  // Get rid of dead prototypes
-    }
-
-    if ((*it).find("TailCallElimination") != std::string::npos) {
-      std::cout << "TailCallElimination\n";
-      addPass(PM, createTailCallEliminationPass());  // Eliminate tail calls
-    }
-  }
+// #if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
+//   addPass(PM, createRaiseAllocationsPass());     // call %malloc -> malloc inst
+// #endif
+//   addPass(PM, createCFGSimplificationPass());    // Clean up disgusting code
+//   addPass(PM, createPromoteMemoryToRegisterPass());// Kill useless allocas
+//   addPass(PM, createGlobalOptimizerPass());      // Optimize out global vars
+//   addPass(PM, createGlobalDCEPass());            // Remove unused fns and globs
+//   addPass(PM, createIPConstantPropagationPass());// IP Constant Propagation
+//   addPass(PM, createDeadArgEliminationPass());   // Dead argument elimination
+//   addPass(PM, createInstructionCombiningPass()); // Clean up after IPCP & DAE
+//   addPass(PM, createCFGSimplificationPass());    // Clean up after IPCP & DAE
+// 
+//   addPass(PM, createPruneEHPass());              // Remove dead EH info
+//   addPass(PM, createFunctionAttrsPass());        // Deduce function attrs
+// 
+//   if (!DisableInline)
+//     addPass(PM, createFunctionInliningPass());   // Inline small functions
+//   addPass(PM, createArgumentPromotionPass());    // Scalarize uninlined fn args
+// 
+//   addPass(PM, createSimplifyLibCallsPass());     // Library Call Optimizations
+//   addPass(PM, createInstructionCombiningPass()); // Cleanup for scalarrepl.
+//   addPass(PM, createJumpThreadingPass());        // Thread jumps.
+//   addPass(PM, createCFGSimplificationPass());    // Merge & remove BBs
+//   addPass(PM, createScalarReplAggregatesPass()); // Break up aggregate allocas
+//   addPass(PM, createInstructionCombiningPass()); // Combine silly seq's
+// #if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
+//   addPass(PM, createCondPropagationPass());      // Propagate conditionals
+// #endif
+// 
+//   addPass(PM, createTailCallEliminationPass());  // Eliminate tail calls
+//   addPass(PM, createCFGSimplificationPass());    // Merge & remove BBs
+//   addPass(PM, createReassociatePass());          // Reassociate expressions
+//   addPass(PM, createLoopRotatePass());
+//   addPass(PM, createLICMPass());                 // Hoist loop invariants
+//   addPass(PM, createLoopUnswitchPass());         // Unswitch loops.
+// #if LLVM_VERSION_CODE < LLVM_VERSION(2, 9)
+//   addPass(PM, createLoopIndexSplitPass());       // Index split loops.
+// #endif
+//   // FIXME : Removing instcombine causes nestedloop regression.
+//   addPass(PM, createInstructionCombiningPass());
+//   addPass(PM, createIndVarSimplifyPass());       // Canonicalize indvars
+//   addPass(PM, createLoopDeletionPass());         // Delete dead loops
+//   addPass(PM, createLoopUnrollPass());           // Unroll small loops
+//   addPass(PM, createInstructionCombiningPass()); // Clean up after the unroller
+//   addPass(PM, createGVNPass());                  // Remove redundancies
+//   addPass(PM, createMemCpyOptPass());            // Remove memcpy / form memset
+//   addPass(PM, createSCCPPass());                 // Constant prop with SCCP
+// 
+//   // Run instcombine after redundancy elimination to exploit opportunities
+//   // opened up by them.
+//   addPass(PM, createInstructionCombiningPass());
+// #if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
+//   addPass(PM, createCondPropagationPass());      // Propagate conditionals
+// #endif
+// 
+//   addPass(PM, createDeadStoreEliminationPass()); // Delete dead stores
+//   addPass(PM, createAggressiveDCEPass());        // Delete dead instructions
+//   addPass(PM, createCFGSimplificationPass());    // Merge & remove BBs
+//   addPass(PM, createStripDeadPrototypesPass());  // Get rid of dead prototypes
+// #if LLVM_VERSION_CODE < LLVM_VERSION(3, 0)
+//   addPass(PM, createDeadTypeEliminationPass());  // Eliminate dead types
+// #endif
+//   addPass(PM, createConstantMergePass());        // Merge dup global constants
 }
 
 /// Optimize - Perform link time optimizations. This will run the scalar
@@ -345,7 +415,7 @@ void Optimize(Module* M) {
 //
 //    // Propagate constants at call sites into the functions they call.  This
 //    // opens opportunities for globalopt (and inlining) by substituting function
-//    // pointers passed as arguments to direct uses of functions.
+//    // pointers passed as arguments to direct uses of functions.  
 //    addPass(Passes, createIPSCCPPass());
 //
 //    // Now that we internalized some globals, see if we can hack on them!
@@ -394,7 +464,7 @@ void Optimize(Module* M) {
 //
 //    addPass(Passes, createJumpThreadingPass());        // Thread jumps.
 //    addPass(Passes, createPromoteMemoryToRegisterPass()); // Cleanup jumpthread.
-//
+//    
 //    // Delete basic blocks, which optimization passes may have killed...
 //    addPass(Passes, createCFGSimplificationPass());
 //
@@ -416,7 +486,7 @@ void Optimize(Module* M) {
 //    if (Opt->getNormalCtor())
 //      addPass(Passes, Opt->getNormalCtor()());
 //    else
-//      std::cerr << "llvm-ld: cannot create pass: " << Opt->getPassName()
+//      std::cerr << "llvm-ld: cannot create pass: " << Opt->getPassName() 
 //                << "\n";
 //  }
 //#endif

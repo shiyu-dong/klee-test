@@ -13,17 +13,27 @@
 #include "klee/Internal/Support/ModuleUtil.h"
 #include "klee/Internal/System/Time.h"
 
+#if LLVM_VERSION_CODE > LLVM_VERSION(3, 2)
+#include "llvm/IR/Constants.h"
+#include "llvm/IR/Module.h"
+#include "llvm/IR/Type.h"
+#include "llvm/IR/InstrTypes.h"
+#include "llvm/IR/Instruction.h"
+#include "llvm/IR/Instructions.h"
+#include "llvm/IR/LLVMContext.h"
+#else
 #include "llvm/Constants.h"
 #include "llvm/Module.h"
-#if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
-#include "llvm/ModuleProvider.h"
-#endif
 #include "llvm/Type.h"
 #include "llvm/InstrTypes.h"
 #include "llvm/Instruction.h"
 #include "llvm/Instructions.h"
 #if LLVM_VERSION_CODE >= LLVM_VERSION(2, 7)
 #include "llvm/LLVMContext.h"
+#endif
+#endif
+#if LLVM_VERSION_CODE < LLVM_VERSION(2, 7)
+#include "llvm/ModuleProvider.h"
 #endif
 #include "llvm/Bitcode/ReaderWriter.h"
 #include "llvm/Support/CommandLine.h"
@@ -284,7 +294,7 @@ KleeHandler::KleeHandler(int argc, char **argv)
       }
     }    
 
-    std::cout << "KLEE: output directory = \"" << dirname << "\"\n";
+    std::cerr << "KLEE: output directory = \"" << dirname << "\"\n";
 
     llvm::sys::Path klee_last(directory);
     klee_last.appendComponent("klee-last");
@@ -303,7 +313,11 @@ KleeHandler::KleeHandler(int argc, char **argv)
   }
   
   sys::Path p(theDir);
+#if LLVM_VERSION_CODE < LLVM_VERSION(3, 1)
   if (!p.isAbsolute()) {
+#else
+  if (!sys::path::is_absolute(p.c_str())) {
+#endif
     sys::Path cwd = sys::Path::GetCurrentDirectory();
     cwd.appendComponent(theDir);
     p = cwd;
@@ -311,7 +325,7 @@ KleeHandler::KleeHandler(int argc, char **argv)
   strcpy(m_outputDirectory, p.c_str());
 
   if (mkdir(m_outputDirectory, 0775) < 0) {
-    std::cout << "KLEE: ERROR: Unable to make output directory: \"" 
+    std::cerr << "KLEE: ERROR: Unable to make output directory: \"" 
                << m_outputDirectory 
                << "\", refusing to overwrite.\n";
     exit(1);
@@ -349,8 +363,6 @@ void KleeHandler::setInterpreter(Interpreter *i) {
     assert(m_symPathWriter->good());
     m_interpreter->setSymbolicPathWriter(m_symPathWriter);
   }
-
-
 }
 
 std::string KleeHandler::getOutputFilename(const std::string &filename) {
@@ -394,7 +406,7 @@ void KleeHandler::processTestCase(const ExecutionState &state,
                                   const char *errorMessage, 
                                   const char *errorSuffix) {
   if (errorMessage && ExitOnError) {
-    std::cout << "EXITING ON ERROR:\n" << errorMessage << "\n";
+    std::cerr << "EXITING ON ERROR:\n" << errorMessage << "\n";
     exit(1);
   }
 
@@ -536,7 +548,7 @@ void KleeHandler::getOutFiles(std::string path,
   std::set<llvm::sys::Path> contents;
   std::string error;
   if (p.getDirectoryContents(contents, &error)) {
-    std::cout << "ERROR: unable to read output directory: " << path 
+    std::cerr << "ERROR: unable to read output directory: " << path 
                << ": " << error << "\n";
     exit(1);
   }
@@ -602,7 +614,11 @@ static void parseArguments(int argc, char **argv) {
     argArray[i] = arguments[i-1].c_str();
   }
 
+#if LLVM_VERSION_CODE >= LLVM_VERSION(3, 2)
+  cl::ParseCommandLineOptions(numArgs, (const char**) argArray, " klee\n");
+#else
   cl::ParseCommandLineOptions(numArgs, (char**) argArray, " klee\n");
+#endif
   delete[] argArray;
 }
 
@@ -672,8 +688,8 @@ static int initEnv(Module *mainModule) {
 }
 
 
-// This is a terrible hack until we get some real modelling of the
-// system. All we do is check the undefined symbols and m and warn about
+// This is a terrible hack until we get some real modeling of the
+// system. All we do is check the undefined symbols and warn about
 // any "unrecognized" externals and about any obviously unsafe ones.
 
 // Symbols we explicitly support
@@ -717,7 +733,11 @@ static const char *modelledExternals[] = {
   "klee_warning_once", 
   "klee_alias_function",
   "klee_stack_trace",
-  "llvm.dbg.stoppoint", 
+  "llvm.dbg.stoppoint",
+#if LLVM_VERSION_CODE >= LLVM_VERSION(3, 1)
+  "llvm.dbg.declare",
+  "llvm.dbg.value",
+#endif
   "llvm.va_start", 
   "llvm.va_end", 
   "malloc", 
@@ -909,11 +929,11 @@ void stop_forking() {
 
 static void interrupt_handle() {
   if (!interrupted && theInterpreter) {
-    std::cout << "KLEE: ctrl-c detected, requesting interpreter to halt.\n";
+    std::cerr << "KLEE: ctrl-c detected, requesting interpreter to halt.\n";
     halt_execution();
     sys::SetInterruptFunction(interrupt_handle);
   } else {
-    std::cout << "KLEE: ctrl-c detected, exiting.\n";
+    std::cerr << "KLEE: ctrl-c detected, exiting.\n";
     exit(1);
   }
   interrupted = true;
@@ -1240,7 +1260,11 @@ int main(int argc, char **argv, char **envp) {
   case KleeLibc: {
     // FIXME: Find a reasonable solution for this.
     llvm::sys::Path Path(Opts.LibraryDir);
+#if LLVM_VERSION_CODE >= LLVM_VERSION(3, 3)
+    Path.appendComponent("klee-libc.bc");
+#else
     Path.appendComponent("libklee-libc.bca");
+#endif
     mainModule = klee::linkWithLibrary(mainModule, Path.c_str());
     assert(mainModule && "unable to link with klee-libc");
     break;
@@ -1263,7 +1287,7 @@ int main(int argc, char **argv, char **envp) {
   // locale and other data and then calls main.
   Function *mainFn = mainModule->getFunction("main");
   if (!mainFn) {
-    std::cout << "'main' function not found in module.\n";
+    std::cerr << "'main' function not found in module.\n";
     return -1;
   }
 
@@ -1357,7 +1381,7 @@ int main(int argc, char **argv, char **envp) {
       if (out) {
         kTests.push_back(out);
       } else {
-        std::cout << "KLEE: unable to open: " << *it << "\n";
+        std::cerr << "KLEE: unable to open: " << *it << "\n";
       }
     }
 
@@ -1374,7 +1398,7 @@ int main(int argc, char **argv, char **envp) {
          it != ie; ++it) {
       KTest *out = *it;
       interpreter->setReplayOut(out);
-      std::cout << "KLEE: replaying: " << *it << " (" << kTest_numBytes(out) << " bytes)"
+      std::cerr << "KLEE: replaying: " << *it << " (" << kTest_numBytes(out) << " bytes)"
                  << " (" << ++i << "/" << outFiles.size() << ")\n";
       // XXX should put envp in .ktest ?
       interpreter->runFunctionAsMain(mainFn, out->numArgs, out->args, pEnvp);
@@ -1392,7 +1416,7 @@ int main(int argc, char **argv, char **envp) {
          it != ie; ++it) {
       KTest *out = kTest_fromFile(it->c_str());
       if (!out) {
-        std::cout << "KLEE: unable to open: " << *it << "\n";
+        std::cerr << "KLEE: unable to open: " << *it << "\n";
         exit(1);
       }
       seeds.push_back(out);
@@ -1407,19 +1431,19 @@ int main(int argc, char **argv, char **envp) {
            it2 != ie; ++it2) {
         KTest *out = kTest_fromFile(it2->c_str());
         if (!out) {
-          std::cout << "KLEE: unable to open: " << *it2 << "\n";
+          std::cerr << "KLEE: unable to open: " << *it2 << "\n";
           exit(1);
         }
         seeds.push_back(out);
       }
       if (outFiles.empty()) {
-        std::cout << "KLEE: seeds directory is empty: " << *it << "\n";
+        std::cerr << "KLEE: seeds directory is empty: " << *it << "\n";
         exit(1);
       }
     }
        
     if (!seeds.empty()) {
-      std::cout << "KLEE: using " << seeds.size() << " seeds\n";
+      std::cerr << "KLEE: using " << seeds.size() << " seeds\n";
       interpreter->useSeeds(&seeds);
     }
     if (RunInDir != "") {
@@ -1489,15 +1513,12 @@ int main(int argc, char **argv, char **envp) {
         << handler->getNumPathsExplored() << "\n";
   stats << "KLEE: done: generated tests = " 
         << handler->getNumTestCases() << "\n";
-
-  std::cout << stats.str();
+  std::cerr << stats.str();
   handler->getInfoStream() << stats.str();
 
   printf ("KLEE: done: total instructions = %d\n", int(instructions));
   printf ("KLEE: done: completed paths = %d\n", int(handler->getNumPathsExplored()));
   printf ("KLEE: done: generated tests = %d\n", int(handler->getNumTestCases()));
-
-
 
 #if LLVM_VERSION_CODE >= LLVM_VERSION(2, 9)
   BufferPtr.take();
