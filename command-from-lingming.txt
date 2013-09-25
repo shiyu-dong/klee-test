@@ -1,1 +1,0 @@
-klee --max-time 100 --output-dir sleep-tests --libc=uclibc --posix-runtime ./sleep.bc --sym-args 0 3 10 --sym-files 2 8
