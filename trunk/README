@@ -1,0 +1,10 @@
+Description and usage:
+
+check.sh:
+  run all the coreutils test with combination of optimizations
+
+compare-optimization.sh [program]:
+  run one coreutil test with combination of optimizations
+
+run-a-test.sh [PROGRAM] [OPT1] [OPT2]:
+  run one coreutil test for specific settings
