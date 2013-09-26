@@ -5,6 +5,7 @@ PROGRAMS="base64 basename cat chcon chgrp chmod chown chroot cksum comm cp cspli
   ptx pwd readlink rm rmdir runcon seq setuidgid shred shuf sleep sort split \
   stat stty sum sync tac tail tee touch tr tsort tty uname unexpand uniq unlink \
   uptime users wc whoami who yes"
+#PROGRAMS="basename date df su touch"
 
 if [ "$1" == "--clean" ]
 then
@@ -15,6 +16,6 @@ else
   fi
   for program in $PROGRAMS
   do
-    ./compare-optimization.sh $program $> test_result/result_$program.txt
+    ./compare-optimization.sh $program &> test_result/result_$program.txt
   done
 fi

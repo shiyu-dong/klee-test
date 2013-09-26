@@ -14,17 +14,14 @@ CMD="klee \
 --only-output-states-covering-new \
 --environ=../test.env \
 --run-in=/tmp/sandbox \
---stop-after-n-tests=10 \
---max-forks=10 \
 --max-sym-array-size=4096 \
 --max-instruction-time=30. \
---max-time=600. \
 --watchdog \
+--max-time=600. \
 --max-memory-inhibit=false \
 --max-static-fork-pct=1 \
 --max-static-solve-pct=1 \
 --max-static-cpfork-pct=1 \
---no-output \
 --switch-type=internal \
 --randomize-fork \
 --search=random-path \
@@ -46,4 +43,5 @@ CMD="$CMD ../$1.bc \
 ${CMD}
 
 # --max-forks=10 \
-#-stop-after-n-tests=10 \
+# --stop-after-n-tests=10 \
+# --no-output \
