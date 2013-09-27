@@ -9,7 +9,7 @@ then
   klee-stats --print-all ../klee-last
   rm -rf ../../../obj-gcov/src/*.gcda
   klee-replay ../../../obj-gcov/src/$1 ../klee-last/*.ktest
-  gcov $1
+  gcov ../../../obj-gcov/src/$1
 
   # with optimization but no flag
   echo "=============================================="
@@ -19,7 +19,7 @@ then
   klee-stats --print-all ../klee-last
   rm -rf ../../../obj-gcov/src/*.gcda
   klee-replay ../../../obj-gcov/src/$1 ../klee-last/*.ktest
-  gcov $1
+  gcov ../../../obj-gcov/src/$1
 
   for OPT in \
     AggressiveDCE \
@@ -63,7 +63,7 @@ then
     klee-stats --print-all ../klee-last
     rm -rf ../../../obj-gcov/src/*.gcda
     klee-replay ../../../obj-gcov/src/$1 ../klee-last/*.ktest
-    gcov $1
+    gcov ../../../obj-gcov/src/$1
   done
 
 #   # with two memory optimization only
