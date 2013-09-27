@@ -7,9 +7,12 @@ then
   echo "=============================================="
   ./run-a-test.sh $1
   klee-stats --print-all ../klee-last
-  rm -rf ../../../obj-gcov/src/*.gcda
-  klee-replay ../../../obj-gcov/src/$1 ../klee-last/*.ktest
-  gcov ../../../obj-gcov/src/$1
+
+  cd ../../../obj-llvm/src/
+  rm -rf *.gcda
+  klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
+  gcov $1
+  cd ../../obj-llvm/src/klee-test
 
   # with optimization but no flag
   echo "=============================================="
@@ -17,9 +20,12 @@ then
   echo "=============================================="
   ./run-a-test.sh $1 --optimize
   klee-stats --print-all ../klee-last
-  rm -rf ../../../obj-gcov/src/*.gcda
-  klee-replay ../../../obj-gcov/src/$1 ../klee-last/*.ktest
-  gcov ../../../obj-gcov/src/$1
+
+  cd ../../../obj-llvm/src/
+  rm -rf *.gcda
+  klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
+  gcov $1
+  cd ../../obj-llvm/src/klee-test
 
   for OPT in \
     AggressiveDCE \
@@ -61,9 +67,13 @@ then
     echo "=============================================="
     ./run-a-test.sh $1 --optimize --opt-flag=${OPT}
     klee-stats --print-all ../klee-last
-    rm -rf ../../../obj-gcov/src/*.gcda
-    klee-replay ../../../obj-gcov/src/$1 ../klee-last/*.ktest
-    gcov ../../../obj-gcov/src/$1
+
+    cd ../../../obj-llvm/src/
+    rm -rf *.gcda
+    klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
+    gcov $1
+    cd ../../obj-llvm/src/klee-test
+
   done
 
 #   # with two memory optimization only
