@@ -8,7 +8,7 @@ then
   ./run-a-test.sh $1
   klee-stats --print-all ../klee-last
 
-  cd ../../../obj-llvm/src/
+  cd ../../../obj-gcov/src/
   rm -rf *.gcda
   klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
   gcov $1
@@ -21,7 +21,7 @@ then
   ./run-a-test.sh $1 --optimize
   klee-stats --print-all ../klee-last
 
-  cd ../../../obj-llvm/src/
+  cd ../../../obj-gcov/src/
   rm -rf *.gcda
   klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
   gcov $1
@@ -68,7 +68,7 @@ then
     ./run-a-test.sh $1 --optimize --opt-flag=${OPT}
     klee-stats --print-all ../klee-last
 
-    cd ../../../obj-llvm/src/
+    cd ../../../obj-gcov/src/
     rm -rf *.gcda
     klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
     gcov $1
