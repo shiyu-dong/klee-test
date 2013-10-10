@@ -1,0 +1,237 @@
+==============================================
+with optimization flag RaiseAllocation
+==============================================
+KLEE: WATCHDOG: watching 13445
+KLEE: NOTE: Using model: /home/shiyu/Documents/Workspace/KLEE/klee/Release+Asserts/lib/libkleeRuntimePOSIX.bca
+KLEE: output directory = "klee-out-1"
+KLEE: WARNING ONCE: function "vasnprintf" has inline asm
+KLEE: WARNING: undefined reference to function: __ctype_b_loc
+KLEE: WARNING: undefined reference to function: __xstat64
+KLEE: WARNING: undefined reference to function: signbitl
+KLEE: WARNING: executable has module level assembly (ignoring)
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 50115008)
+KLEE: WARNING ONCE: calling __user_main with extra arguments.
+KLEE: WARNING ONCE: silently concretizing (reason: max-sym-array-size) expression (Add w64 50260192
+         (Mul w64 8
+                  (SExt w64 (Sub w32 0
+                                     (Select w32 (Ult 4294966272
+                                                      N0:(Xor w32 4294967295
+                                                                  (ReadLSB w32 0 n_args)))
+                                                 N0
+                                                 4294966272))))) to value 50260208 (/home/shiyu/Documents/Workspace/KLEE/klee/runtime/POSIX/klee_init_env.c:80)
+KLEE: WARNING ONCE: calling external: __xstat64(1, 50008496, 50362208)
+KLEE: WARNING ONCE: calling close_stdout with extra arguments.
+KLEE: WARNING ONCE: calling external: printf(49891520, (ReadLSB w64 0 U0:[(Add w32 7
+                            N0:(Extract w32 0 (Mul w64 8
+                                                       (SExt w64 (Sub w32 4294967295
+                                                                          (Add w32 N1:(Select w32 (Ult 4294966272
+                                                                                                       N2:(Xor w32 4294967295
+                                                                                                                   (ReadLSB w32 0 n_args)))
+                                                                                                  N2
+                                                                                                  4294966272)
+                                                                                   (Select w32 (Ult N3:(Sub w32 4294966271 N1) 4294967295)
+                                                                                               4294967295
+                                                                                               N3)))))))=0,
+                   (Add w32 6 N0)=0,
+                   (Add w32 5 N0)=0,
+                   (Add w32 4 N0)=0,
+                   (Add w32 3 N0)=0,
+                   (Add w32 2 N0)=0,
+                   (Add w32 1 N0)=0,
+                   N0=0] @ const_arr2))
+Usage: ../echo.bc [OPTION]... [STRING]...
+KLEE: WARNING ONCE: calling external: vprintf(49919280, 51647696)
+echo (GNU coreutils) 6.11
+Copyright (C) 2008 Free Software Foundation, Inc.
+NOTE: your shell may have its own version of echo, which usually supersedes
+the version described here.  Please refer to your shell's documentation
+for details about the options it supports.
+
+Report bugs to <bug-coreutils@gnu.org>.
+KLEE: WARNING ONCE: calling external: __ctype_b_loc()
+Usage: ../echo.bc [OPTION]... [STRING]...
+
+NOTE: your shell may have its own version of echo, which usually supersedes
+the version described here.  Please refer to your shell's documentation
+for details about the options it supports.
+
+Report bugs to <bug-coreutils@gnu.org>.
+echo (GNU coreutils) 6.11
+Copyright (C) 2008 Free Software Foundation, Inc.echo (GNU coreutils) 6.11
+Copyright (C) 2008 Free Software Foundation, Inc.Usage: ../echo.bc [OPTION]... [STRING]...
+
+NOTE: your shell may have its own version of echo, which usually supersedes
+the version described here.  Please refer to your shell's documentation
+for details about the options it supports.
+
+Report bugs to <bug-coreutils@gnu.org>.
+Usage: ../echo.bc [OPTION]... [STRING]...
+
+NOTE: your shell may have its own version of echo, which usually supersedes
+the version described here.  Please refer to your shell's documentation
+for details about the options it supports.
+
+Report bugs to <bug-coreutils@gnu.org>.
+echo (GNU coreutils) 6.11
+Copyright (C) 2008 Free Software Foundation, Inc.echo (GNU coreutils) 6.11
+Copyright (C) 2008 Free Software Foundation, Inc.KLEE: HaltTimer invoked
+
+KLEE: done: total instructions = 2466408
+KLEE: done: completed paths = 1265
+KLEE: done: generated tests = 36
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Path      |  Instrs | Time(s) | ICov(%) | BCov(%) | ICount | TSolver(%) | States | maxStates | avgStates | Mem(MB) | maxMem(MB) | avgMem(MB) | Queries | AvgQC | Tcex(%) | Tfork(%) |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| klee-last | 2466408 |  600.20 |   25.15 |   16.99 |  21129 |      97.47 |   1921 |      1921 |    999.76 |   42.24 |      42.85 |      33.48 |   31799 |   378 |    0.00 |     0.55 |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000001.ktest
+klee-replay: ARGS: "echo" "  " "  " " " 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000002.ktest
+klee-replay: ARGS: "echo" "2<=" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000003.ktest
+klee-replay: ARGS: "echo" "-" " " 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000004.ktest
+klee-replay: ARGS: "echo" "" "~" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000005.ktest
+klee-replay: ARGS: "echo" "--=" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000006.ktest
+klee-replay: ARGS: "echo" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000007.ktest
+klee-replay: ARGS: "echo" "-" "?" "" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000008.ktest
+klee-replay: ARGS: "echo" "-e" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000009.ktest
+klee-replay: ARGS: "echo" "--ve=" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000010.ktest
+klee-replay: ARGS: "echo" "--" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000011.ktest
+klee-replay: ARGS: "echo" "-e" "~" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000012.ktest
+klee-replay: ARGS: "echo" "-E" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000013.ktest
+klee-replay: ARGS: "echo" "-eee" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000014.ktest
+klee-replay: ARGS: "echo" "-ene" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000015.ktest
+klee-replay: ARGS: "echo" "--v`=" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000016.ktest
+klee-replay: ARGS: "echo" "-eee" "\a" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000017.ktest
+klee-replay: ARGS: "echo" "-eee" "\v" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000018.ktest
+klee-replay: ARGS: "echo" "-eee" "\r" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000019.ktest
+klee-replay: ARGS: "echo" "-eee" "\7" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000020.ktest
+klee-replay: ARGS: "echo" "-nee" "-" "B\" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000021.ktest
+klee-replay: ARGS: "echo" "-eee" "\t" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000022.ktest
+klee-replay: ARGS: "echo" "-e" "`!" "\f" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000023.ktest
+klee-replay: ARGS: "echo" "-" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000024.ktest
+klee-replay: ARGS: "echo" "-eee" "\" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000025.ktest
+klee-replay: ARGS: "echo" "--v" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000026.ktest
+klee-replay: ARGS: "echo" "--h" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000027.ktest
+klee-replay: ARGS: "echo" "-e" "" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000028.ktest
+klee-replay: ARGS: "echo" "-Ee" "-e" "\p" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000029.ktest
+klee-replay: ARGS: "echo" "B" "" "^~" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000030.ktest
+klee-replay: ARGS: "echo" "-e" "`!" "\0" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000031.ktest
+klee-replay: ARGS: "echo" "-eee" "\x" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000032.ktest
+klee-replay: ARGS: "echo" "-eee" "\n" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000033.ktest
+klee-replay: ARGS: "echo" "-nee" "-" "\b" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000034.ktest
+klee-replay: ARGS: "echo" "-e" "\c" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000035.ktest
+klee-replay: ARGS: "echo" "-e" "\a" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+
+klee-replay: TEST CASE: ../../obj-llvm/src/klee-last/test000036.ktest
+klee-replay: ARGS: "echo" "--help" 
+klee-replay: EXIT STATUS: NORMAL (0 seconds)
+File '../../src/echo.c'
+Lines executed:79.61% of 103
+../../src/echo.c:creating 'echo.c.gcov'
+
+File '../../src/system.h'
+Lines executed:100.00% of 3
+../../src/system.h:creating 'system.h.gcov'
+
