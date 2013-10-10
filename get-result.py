@@ -43,6 +43,9 @@ while True:
           elif line.find("only --optimize, no --opt-flag") != -1:
             opt = "OptimizeOnly"
             print opt
+          elif line.find("original optimization") != -1:
+            opt = "OriginalOptimization"
+            print opt
           else:
             opt = line.split()[3]
             print opt
