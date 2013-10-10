@@ -8,9 +8,9 @@ import csv
 fo = open(sys.argv[1],"r")
 name = re.split('_|\.', sys.argv[1])[3]
 
-if not os.path.exists("test_result_saved/csv"):
-  os.makedirs("test_result_saved/csv")
-fw = open("test_result_saved/csv/"+name+".csv", "wb")
+if not os.path.exists("csv"):
+  os.makedirs("csv")
+fw = open("csv/"+name+".csv", "wb")
 wr = csv.writer(fw, quoting=csv.QUOTE_ALL)
 result = []
 

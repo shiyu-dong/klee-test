@@ -14,18 +14,33 @@ then
   gcov $1
   cd ../../obj-llvm/src/klee-test
 
-  # # with optimization but no flag
-  # echo "=============================================="
-  # echo "only --optimize, no --opt-flag"
-  # echo "=============================================="
-  # ./run-a-test.sh $1 --optimize
-  # klee-stats --print-all ../klee-last
+  # # Combination of two
+  # for OPT1 in \
+  #   AggressiveDCE \
+  #   FunctionInlining \
+  #   Reassociate
+  # do
+  #   for OPT2 in \
+  #     AggressiveDCE \
+  #     FunctionInlining \
+  #     Reassociate
+  #   do
+  #     if [ ${OPT1} != ${OPT2} ]
+  #     then
+  #       echo "=============================================="
+  #       echo "with optimization flags "${OPT1}","${OPT2}
+  #       echo "=============================================="
+  #       ./run-a-test.sh $1 --optimize --opt-flag=${OPT1},${OPT2}
+  #       klee-stats --print-all ../klee-last
 
-  # cd ../../../obj-gcov/src/
-  # rm -rf *.gcda
-  # klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-  # gcov $1
-  # cd ../../obj-llvm/src/klee-test
+  #       cd ../../../obj-gcov/src/
+  #       rm -rf *.gcda
+  #       klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
+  #       gcov $1
+  #       cd ../../obj-llvm/src/klee-test
+  #     fi
+  #   done
+  # done
 
   for OPT in \
     AggressiveDCE \
@@ -52,8 +67,8 @@ then
     LoopUnroll \
     LoopUnswitch \
     MemCpyOpt \
-    PruneEH \
     PromoteMemoryToRegister \
+    PruneEH \
     RaiseAllocation \
     Reassociate \
     ScalarReplAggregates \

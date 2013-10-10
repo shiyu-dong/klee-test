@@ -1,6 +1,6 @@
 #!/bin/bash
-PROGRAMS="base64 basename cat chcon date df touch"
+PROGRAMS="seq echo fold chgrp chown readlink uname"
 for program in $PROGRAMS
 do
-  ./get-result.py test_result_saved/result_$program.txt
+  ./get-result.py test_result_new/result_$program.txt
 done
