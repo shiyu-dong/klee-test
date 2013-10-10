@@ -10,6 +10,7 @@ CMD="klee \
 --use-cex-cache=false \
 --libc=uclibc \
 --posix-runtime \
+--dump-states-on-halt=false \
 --allow-external-sym-calls \
 --only-output-states-covering-new \
 --environ=../test.env \
@@ -45,3 +46,4 @@ ${CMD}
 # --max-forks=10 \
 # --stop-after-n-tests=10 \
 # --no-output \
+# --dump-states-on-halt=false \

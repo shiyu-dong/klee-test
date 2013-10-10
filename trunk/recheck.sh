@@ -1,5 +1,5 @@
 if [ ! -d "test_result" ]; then
   mkdir test_result
 fi
-./replay.sh date GlobalOptimizer &> test_result/result_date_GlobalOptimizer.txt
-./replay.sh date IndVarSimplify &> test_result/result_date_IndVarSimplify.txt
+./replay.sh tr DeadArgElimination &> test_result/result_tr_DeadArgElimination.txt
+./replay.sh echo RaiseAllocation &> test_result/result_echo_RaiseAllocation.txt
