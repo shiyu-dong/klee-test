@@ -11,6 +11,6 @@ then
   cd ../../../obj-gcov/src/
   rm -rf *.gcda
   klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-  gcov $1
+  gcov -b -c $1
   cd ../../obj-llvm/src/klee-test
 fi

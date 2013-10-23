@@ -1,3 +1,44 @@
+FLAG1="\
+RaiseAllocation,\
+ScalarReplAggregates,\
+MemCpyOpt,\
+InstructionCombining,\
+CondPropagation,\
+DeadArgElimination,\
+DeadStoreElimination,\
+DeadTypeElimination,\
+FunctionAttrs,\
+GlobalDCE,\
+GVN,\
+IPConstantPropagation,\
+LICM,\
+LoopDeletion,\
+LoopIndexSplit,\
+LoopRotate,\
+LoopUnswitch,\
+PruneEH,\
+Reassociate,\
+SimplifyLibCalls,\
+SCCP,\
+StripDeadPrototypes,\
+CFGSimplification"
+
+FLAG2="\
+aiseAllocation,\
+ScalarReplAggregates,\
+MemCpyOpt,\
+InstructionCombining,\
+DeadStoreElimination,\
+DeadTypeElimination,\
+FunctionAttrs,\
+GlobalDCE,\
+IPConstantPropagation,\
+LoopDeletion,\
+LoopRotate,\
+PruneEH,\
+Reassociate,\
+StripDeadPrototypes"
+
 rm -rf ../klee-out-* ../klee-last
 if [ "$1" != "--clean" ]
 then
@@ -11,36 +52,8 @@ then
   cd ../../../obj-gcov/src/
   rm -rf *.gcda
   klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-  gcov $1
+  gcov -b -c $1
   cd ../../obj-llvm/src/klee-test
-
-  # # Combination of two
-  # for OPT1 in \
-  #   AggressiveDCE \
-  #   FunctionInlining \
-  #   Reassociate
-  # do
-  #   for OPT2 in \
-  #     AggressiveDCE \
-  #     FunctionInlining \
-  #     Reassociate
-  #   do
-  #     if [ ${OPT1} != ${OPT2} ]
-  #     then
-  #       echo "=============================================="
-  #       echo "with optimization flags "${OPT1}","${OPT2}
-  #       echo "=============================================="
-  #       ./run-a-test.sh $1 --optimize --opt-flag=${OPT1},${OPT2}
-  #       klee-stats --print-all ../klee-last
-
-  #       cd ../../../obj-gcov/src/
-  #       rm -rf *.gcda
-  #       klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-  #       gcov $1
-  #       cd ../../obj-llvm/src/klee-test
-  #     fi
-  #   done
-  # done
 
   for OPT in \
     AggressiveDCE \
@@ -75,7 +88,9 @@ then
     SCCP \
     SimplifyLibCalls \
     StripDeadPrototypes \
-    TailCallElimination
+    TailCallElimination \
+    ${FLAG1} \
+    ${FLAG2}
   do
     echo "=============================================="
     echo "with optimization flag "${OPT}
@@ -86,10 +101,11 @@ then
     cd ../../../obj-gcov/src/
     rm -rf *.gcda
     klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-    gcov $1
+    gcov -b -c $1
     cd ../../obj-llvm/src/klee-test
 
   done
+fi
 
 #   # with two memory optimization only
 #   echo "=============================================="
@@ -216,4 +232,3 @@ then
 #      fi
 #    done
 #  done
-fi
