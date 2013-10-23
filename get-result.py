@@ -24,7 +24,10 @@ while True:
   pathNum = 0
   time = ""
   query = ""
-  coverage = ""
+  line_coverage = ""
+  branch_coverage = ""
+  taken_at_least_once = ""
+  calls_executed = ""
 
   while True:
     if len(line) == 0:
@@ -80,14 +83,25 @@ while True:
     elif line.find("File") != -1 and line.find(name) != -1:
       line = fo.readline()
       if line.find("Lines executed") != -1:
-        coverage = re.split(':|%', line)[1]
-        break
+        line_coverage = re.split(':|%', line)[1]
+        line = fo.readline()
+        if line.find("Branches executed") != -1:
+          branch_coverage = re.split(':|%', line)[1]
+          line = fo.readline()
+          if line.find("Taken at least once") != -1:
+            taken_at_least_once = re.split(':|%', line)[1]
+          line = fo.readline()
+          if line.find("Calls executed") != -1:
+            calls_executed = re.split(':|%', line)[1]
+          break;
+        else:
+          break
       else:
         continue
     line = fo.readline()
 
   if len(opt) > 0:
-    result.append([opt, pathNum, coverage, time, query])
+    result.append([opt, time, line_coverage, branch_coverage, taken_at_least_once, calls_executed])
 for i in result:
   print i
   wr.writerow(i)
