@@ -17,4 +17,4 @@ StripDeadPrototypes"
 if [ ! -d "test_result" ]; then
   mkdir test_result
 fi
-./replay.sh chgrp ${FLAG2} &> test_result/result_chgrp.2.txt
+./replay-flag.sh chgrp ${FLAG2} &> test_result/result_chgrp.2.txt

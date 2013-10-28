@@ -19,7 +19,7 @@ CMD="klee \
 --max-instruction-time=30. \
 --watchdog \
 --time-passes \
---max-time=600. \
+--max-time=300. \
 --max-memory-inhibit=false \
 --max-static-fork-pct=1 \
 --max-static-solve-pct=1 \
