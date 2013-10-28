@@ -63,7 +63,7 @@ while True:
             pathNum = int(token)
             break
 
-    elif line.find("----------") != -1:
+    elif line.find("----------") != -1 and line.find("===-") == -1:
       sys.stdout.write(line)
       row = 0
       while True:

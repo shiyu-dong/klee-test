@@ -18,6 +18,7 @@ CMD="klee \
 --max-sym-array-size=4096 \
 --max-instruction-time=30. \
 --watchdog \
+--time-passes \
 --max-time=600. \
 --max-memory-inhibit=false \
 --max-static-fork-pct=1 \
