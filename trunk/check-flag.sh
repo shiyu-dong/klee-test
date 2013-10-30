@@ -7,7 +7,7 @@ PROGRAMS="env factor chroot date fold expand csplit join head"
 
 if [ "$1" == "--clean" ]
 then
-  ./compare-optimization.sh --clean
+  ./compare-flag.sh --clean
 else
   if [ ! -d "test_result" ]; then
     mkdir test_result

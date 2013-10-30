@@ -1,5 +1,13 @@
-CMD="klee \
---simplify-sym-indices \
+CMD=""
+if [ "$3" != "" ]
+then
+  CMD="$CMD klee-flag "
+else
+  CMD="$CMD klee-original "
+fi
+echo $CMD
+
+CMD="$CMD --simplify-sym-indices \
 --write-cvcs \
 --write-cov \
 --output-module \
