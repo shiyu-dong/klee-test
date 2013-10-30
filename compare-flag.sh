@@ -44,6 +44,8 @@ if [ "$1" != "--clean" ]
 then
 
   for OPT in \
+    ${FLAG1} \
+    ${FLAG2} \
     AggressiveDCE \
     ArgumentPromotion \
     CFGSimplification \
@@ -76,9 +78,7 @@ then
     SCCP \
     SimplifyLibCalls \
     StripDeadPrototypes \
-    TailCallElimination \
-    ${FLAG1} \
-    ${FLAG2}
+    TailCallElimination
   do
     echo "=============================================="
     echo "with optimization flag "${OPT}
