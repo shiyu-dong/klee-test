@@ -27,7 +27,7 @@ CMD="$CMD --simplify-sym-indices \
 --max-instruction-time=30. \
 --watchdog \
 --time-passes \
---max-time=600. \
+--max-time=2. \
 --max-memory-inhibit=false \
 --max-static-fork-pct=1 \
 --max-static-solve-pct=1 \
