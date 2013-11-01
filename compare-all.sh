@@ -24,7 +24,7 @@ StripDeadPrototypes,\
 CFGSimplification"
 
 FLAG2="\
-aiseAllocation,\
+RaiseAllocation,\
 ScalarReplAggregates,\
 MemCpyOpt,\
 InstructionCombining,\
