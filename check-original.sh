@@ -6,11 +6,11 @@ if [ "$1" == "--clean" ]
 then
   ./compare-original.sh --clean
 else
-  if [ ! -d "test_result" ]; then
-    mkdir test_result
+  if [ ! -d "test_result_new" ]; then
+    mkdir test_result_new
   fi
   for program in $PROGRAMS
   do
-    ./compare-original.sh $program &> test_result/result_$program.txt
+    ./compare-original.sh $program &> test_result_new/result_$program.txt
   done
 fi
