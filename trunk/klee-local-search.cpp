@@ -62,14 +62,14 @@ struct data {
   double once; // Taken at least once
   double calls; // Calls executed
   data(){};
-  ~data();
+  ~data(){};
 };
 
 int main(int argc, char* argv[]) {
 
   // Current flags selected so far as "the optimal"
   string current_compiler_flags="";
-  int current_lcov=-1;
+  double current_lcov=-1;
   int i;
 
   // Create test_result_new folder if it doesn't exist
@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
   pclose(test);
 
   // TODO: change date.bc to argv[1].bc
-  test=popen("klee-original --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=300 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
+  test=popen("klee-original --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=10 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
   pclose(test);
 
   test=popen("klee-stats --print-all ../klee-last >> test_result_new/result_date.txt","r");
@@ -100,6 +100,9 @@ int main(int argc, char* argv[]) {
 
   test=popen("cd ../../../obj-gcov/src && gcov -b -c date >> ../../obj-llvm/src/klee-test/test_result_new/result_date.txt","r");
   pclose(test);
+
+  data kleeData;
+
 
   // TODO: I think we need to update the current_lcov here.
 
@@ -146,7 +149,7 @@ int main(int argc, char* argv[]) {
 
       //    popen("./run-a-test.sh date --optimize >> test_result_new/result_date.txt","r");
 
-      str="klee-flag --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=300 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=";
+      str="klee-flag --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=10 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=";
 
       if(current_compiler_flags.compare("")) {
         str+=current_compiler_flags;
@@ -159,7 +162,7 @@ int main(int argc, char* argv[]) {
 
       test=popen(str.c_str(),"r");
 
-      //		  test=popen("klee --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=300 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=AggressiveDCE ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
+      //		  test=popen("klee --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=10 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=AggressiveDCE ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
       pclose(test);
 
       test=popen("klee-stats --print-all ../klee-last >> test_result_new/result_date.txt","r");
@@ -196,6 +199,7 @@ int main(int argc, char* argv[]) {
     ifstream myfile(filename.c_str());
 
     string line;
+    string previous_flag = "";
     cout<<"BEFORE OSWALDO:"<<filename<<endl;
     if (myfile.is_open()) {
       cout<<"AFTER OSWALDO:"<<filename<<endl;
@@ -211,6 +215,12 @@ int main(int argc, char* argv[]) {
         int pos2 = line.find('"', pos1 + 1);
         flag = line.substr(pos1 + 1, pos2 - 1);
         line = line.substr(pos2 + 2);
+
+        // TODO: verify
+        int pos3 = line.find_last_of(',');
+        if (pos3 != string::npos)
+          flag = line.substr(pos3 + 1);
+
 
         // get time
         pos1 = line.find('"');
@@ -246,7 +256,10 @@ int main(int argc, char* argv[]) {
         new_data->calls = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
         cout << new_data->calls << endl;
 
-        dataMap[flag] = new_data;
+        if (flag.compare("OriginalOptimization"))
+          dataMap[flag] = new_data;
+        else
+          kleeData = *new_data;
       }
       myfile.close();
     }
@@ -257,12 +270,12 @@ int main(int argc, char* argv[]) {
 
     // TODO: Should we compare with the no-opt instead of original-opt?
     cout << dataMap.size() << endl;
-    int best_lcov_val=-1;
+    double best_lcov_val=-1;
     string best_compiler_flag="";
     for (std::map<string, data*>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
       cout <<"OSWALDO_FIRST:"<< it->first << endl;
       cout <<"OSWALDO_SECOND:"<< it->second->time << " " << it->second->lcov << " " << it->second->bcov << " " << it->second->once << " " << it->second->calls << endl;
-      if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization")) {
+      if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare(previous_flag)) {
         best_lcov_val = it->second->lcov;
         best_compiler_flag=it->first;
       }
@@ -280,7 +293,11 @@ int main(int argc, char* argv[]) {
       if(current_compiler_flags.compare(""))
         current_compiler_flags+=",";
       current_compiler_flags+=best_compiler_flag;
+      previous_flag = best_compiler_flag;
     }
+
+    //TODO: Verify
+    dataMap.clear();
 
     /*
        if(best_lcov_val < current_lcov) 
