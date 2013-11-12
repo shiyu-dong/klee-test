@@ -106,6 +106,10 @@ int main(int argc, char* argv[]) {
 
   // TODO: I think we need to update the current_lcov here.
 
+
+  // Used to store the previous best flag for last iteration
+  string previous_best_flag = "";
+
   int iters=0;
   // Arbitrarilly asking for 10 flags.
   while(iters<10) {
@@ -138,7 +142,7 @@ int main(int argc, char* argv[]) {
         str+=",";
       }
       str+=compiler_flags[i];
-      str+=" \n ==============================================\" >> test_result_new/result_date.txt";
+      str+="\n==============================================\" >> test_result_new/result_date.txt";
       test=popen(str.c_str(),"r");
 
       //		  test=popen("echo \"==============================================\ \n with optimization flag AggressiveDCE \n ==============================================\" >> test_result_new/result_date.txt","r");
@@ -199,7 +203,6 @@ int main(int argc, char* argv[]) {
     ifstream myfile(filename.c_str());
 
     string line;
-    string previous_flag = "";
     cout<<"BEFORE OSWALDO:"<<filename<<endl;
     if (myfile.is_open()) {
       cout<<"AFTER OSWALDO:"<<filename<<endl;
@@ -214,12 +217,13 @@ int main(int argc, char* argv[]) {
         int pos1 = line.find('"');
         int pos2 = line.find('"', pos1 + 1);
         flag = line.substr(pos1 + 1, pos2 - 1);
-        line = line.substr(pos2 + 2);
 
         // TODO: verify
-        int pos3 = line.find_last_of(',');
+        int pos3 = flag.find_last_of(',');
         if (pos3 != string::npos)
-          flag = line.substr(pos3 + 1);
+          flag = flag.substr(pos3 + 1);
+
+        line = line.substr(pos2 + 2);
 
 
         // get time
@@ -275,7 +279,7 @@ int main(int argc, char* argv[]) {
     for (std::map<string, data*>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
       cout <<"OSWALDO_FIRST:"<< it->first << endl;
       cout <<"OSWALDO_SECOND:"<< it->second->time << " " << it->second->lcov << " " << it->second->bcov << " " << it->second->once << " " << it->second->calls << endl;
-      if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare(previous_flag)) {
+      if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare(previous_best_flag)) {
         best_lcov_val = it->second->lcov;
         best_compiler_flag=it->first;
       }
@@ -293,11 +297,13 @@ int main(int argc, char* argv[]) {
       if(current_compiler_flags.compare(""))
         current_compiler_flags+=",";
       current_compiler_flags+=best_compiler_flag;
-      previous_flag = best_compiler_flag;
+      previous_best_flag = best_compiler_flag;
     }
 
     //TODO: Verify
     dataMap.clear();
+    test=popen("rm test_result_new/*.txt","r");
+    pclose(test);
 
     /*
        if(best_lcov_val < current_lcov) 
