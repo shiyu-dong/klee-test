@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
 
   // Original optimizations.
 
-  test=popen("echo \"============================================== \n original optimization \n ==============================================\" > test_result_new/result_date.txt","r");
+  test=popen("echo \"==============================================\n original optimization\n==============================================\" > test_result_new/result_date.txt","r");
   //        popen("echo \"original optimization\" >> test_result_new/result_date.txt","r");
   //  popen("echo \"=====\" >> test_result_new/result_date.txt","r");
 
