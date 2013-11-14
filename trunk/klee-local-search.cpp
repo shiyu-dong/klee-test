@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
   pclose(test);
 
   // TODO: change date.bc to argv[1].bc
-  test=popen("klee-original --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=10 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
+  test=popen("klee-original --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=300 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
   pclose(test);
 
   test=popen("klee-stats --print-all ../klee-last >> test_result_new/result_date.txt","r");
@@ -153,7 +153,7 @@ int main(int argc, char* argv[]) {
 
       //    popen("./run-a-test.sh date --optimize >> test_result_new/result_date.txt","r");
 
-      str="klee-flag --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=10 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=";
+      str="klee-flag --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=300 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=";
 
       if(current_compiler_flags.compare("")) {
         str+=current_compiler_flags;
@@ -166,7 +166,7 @@ int main(int argc, char* argv[]) {
 
       test=popen(str.c_str(),"r");
 
-      //		  test=popen("klee --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=10 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=AggressiveDCE ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
+      //		  test=popen("klee --simplify-sym-indices --write-cvcs --write-cov --output-module --max-memory=1000 --disable-inlining --use-cache=false --use-cex-cache=false --libc=uclibc --posix-runtime --dump-states-on-halt=false --allow-external-sym-calls --only-output-states-covering-new --environ=../test.env --run-in=/tmp/sandbox --max-sym-array-size=4096 --max-instruction-time=30. --watchdog --time-passes --max-time=300 --max-memory-inhibit=false --max-static-fork-pct=1 --max-static-solve-pct=1 --max-static-cpfork-pct=1 --switch-type=internal --randomize-fork --search=random-path --search=nurs:covnew --use-batching-search --batch-instructions=10000 --optimize --opt-flag=AggressiveDCE ../date.bc --sym-args 0 1 10 --sym-args 0 2 2 --sym-files 1 8 --sym-stdout >> test_result_new/result_date.txt","r");
       pclose(test);
 
       test=popen("klee-stats --print-all ../klee-last >> test_result_new/result_date.txt","r");
