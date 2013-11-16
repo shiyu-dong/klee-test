@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
 
 
     // Trying all optimizations one at a time.
-    for(i=0;i<10;++i) {
+    for(i=0;i<33;++i) {
       // One optimization.
 
       string str ="echo \"==============================================\n with optimization flag ";

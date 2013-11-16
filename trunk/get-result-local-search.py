@@ -34,7 +34,7 @@ while True:
       break
     if line.find("==========") != -1:
       # Oswaldo: Changed
-      sys.stdout.write("==============================================")
+      # sys.stdout.write("==============================================")
       while True:
         line = fo.readline()
         #sys.stdout.write(line)
@@ -53,10 +53,11 @@ while True:
             print opt
           else:
             opt = line.split()[3]
-            sys.stdout.write(opt)
+            # sys.stdout.write(opt)
             #print opt
         else:
-          sys.stdout.write("ERROR! Expetcting optimization name.")
+          pass
+          # sys.stdout.write("ERROR! Expetcting optimization name.")
 
     elif line.find("KLEE: done") != -1:
       #sys.stdout.write(line)
@@ -75,7 +76,7 @@ while True:
         #sys.stdout.write(line)
         #print line
         if line.find("---------") != -1 and row >= 4:
-          sys.stdout.write("\n")
+          # sys.stdout.write("\n")
           break
         elif line.find("klee-last") != -1 and row == 3:
           info = line.split()
