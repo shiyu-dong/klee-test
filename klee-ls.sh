@@ -2,4 +2,4 @@
 ./check-all.sh --clean
 make clean
 make
-./klee-local-search date
+./klee-local-search tr
