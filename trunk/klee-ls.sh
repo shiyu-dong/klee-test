@@ -2,4 +2,7 @@
 ./check-all.sh --clean
 make clean
 make
-./klee-local-search tr
+for program in factor fold join mknod pr seq
+do
+  ./klee-local-search ${program} &> ${program}_5min_all.txt
+done
