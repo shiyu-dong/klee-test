@@ -1,6 +1,6 @@
 #!/bin/bash
 #PROGRAMS="csplit date expand factor fold join tr seq pr mknod"
-PROGRAMS="csplit"
+PROGRAMS="base64 cut dd du expand fold mknod tr tsort unexpand"
 
 if [ "$1" == "--clean" ]
 then
