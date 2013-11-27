@@ -82,26 +82,26 @@ int main(int argc, char* argv[]) {
   test=popen(command.c_str(), "r");
   pclose(test);
 
-  // running klee-stats
-  command = "klee-stats --print-all ../klee-last >> test_result_new/result_";
-  command = command + argv[1] + ".txt";
-  test=popen(command.c_str(), "r");
-  pclose(test);
+  //// running klee-stats
+  //command = "klee-stats --print-all ../klee-last >> test_result_new/result_";
+  //command = command + argv[1] + ".txt";
+  //test=popen(command.c_str(), "r");
+  //pclose(test);
 
-  // running klee replay
-  test=popen("rm -rf ../../../obj-gcov/src/*.gcda","r");
-  pclose(test);
+  //// running klee replay
+  //test=popen("rm -rf ../../../obj-gcov/src/*.gcda","r");
+  //pclose(test);
 
-  command = "klee-replay ../../../obj-gcov/src/";
-  command = command + argv[1] + " ../../../obj-llvm/src/klee-last/*.ktest >> test_result_new/result_" + argv[1] + ".txt";
-  test=popen(command.c_str(),"r");
-  pclose(test);
+  //command = "klee-replay ../../../obj-gcov/src/";
+  //command = command + argv[1] + " ../../../obj-llvm/src/klee-last/*.ktest >> test_result_new/result_" + argv[1] + ".txt";
+  //test=popen(command.c_str(),"r");
+  //pclose(test);
 
-  // running gcov
-  command = "cd ../../../obj-gcov/src && gcov -b -c ";
-  command = command + argv[1] + " >> ../../obj-llvm/src/klee-test/test_result_new/result_" + argv[1] + ".txt";
-  test=popen(command.c_str(),"r");
-  pclose(test);
+  //// running gcov
+  //command = "cd ../../../obj-gcov/src && gcov -b -c ";
+  //command = command + argv[1] + " >> ../../obj-llvm/src/klee-test/test_result_new/result_" + argv[1] + ".txt";
+  //test=popen(command.c_str(),"r");
+  //pclose(test);
 
   data kleeData;
 
@@ -141,26 +141,26 @@ int main(int argc, char* argv[]) {
       test=popen(command.c_str(),"r");
       pclose(test);
 
-      // running klee-stats
-      command = "klee-stats --print-all ../klee-last >> test_result_new/result_";
-      command = command + argv[1] + ".txt";
-      test=popen(command.c_str(), "r");
-      pclose(test);
+      //// running klee-stats
+      //command = "klee-stats --print-all ../klee-last >> test_result_new/result_";
+      //command = command + argv[1] + ".txt";
+      //test=popen(command.c_str(), "r");
+      //pclose(test);
 
-      // running klee replay
-      test=popen("rm -rf ../../../obj-gcov/src/*.gcda","r");
-      pclose(test);
+      //// running klee replay
+      //test=popen("rm -rf ../../../obj-gcov/src/*.gcda","r");
+      //pclose(test);
 
-      command = "klee-replay ../../../obj-gcov/src/";
-      command = command + argv[1] + " ../../../obj-llvm/src/klee-last/*.ktest >> test_result_new/result_" + argv[1] + ".txt";
-      test=popen(command.c_str(),"r");
-      pclose(test);
+      //command = "klee-replay ../../../obj-gcov/src/";
+      //command = command + argv[1] + " ../../../obj-llvm/src/klee-last/*.ktest >> test_result_new/result_" + argv[1] + ".txt";
+      //test=popen(command.c_str(),"r");
+      //pclose(test);
 
-      // running gcov
-      command = "cd ../../../obj-gcov/src && gcov -b -c ";
-      command = command + argv[1] + " >> ../../obj-llvm/src/klee-test/test_result_new/result_" + argv[1] + ".txt";
-      test=popen(command.c_str(),"r");
-      pclose(test);
+      //// running gcov
+      //command = "cd ../../../obj-gcov/src && gcov -b -c ";
+      //command = command + argv[1] + " >> ../../obj-llvm/src/klee-test/test_result_new/result_" + argv[1] + ".txt";
+      //test=popen(command.c_str(),"r");
+      //pclose(test);
 
     }
 
