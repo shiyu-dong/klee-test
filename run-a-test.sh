@@ -52,6 +52,7 @@ CMD="$CMD ../$1.bc \
   --sym-files 1 8 \
   --sym-stdout"
 
+echo $CMD
 ${CMD}
 
 # --max-forks=10 \
