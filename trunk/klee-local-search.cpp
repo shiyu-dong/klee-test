@@ -313,7 +313,7 @@ int main(int argc, char* argv[]) {
   }
 
   cout<<"The best compiler flags after 10 iterations are: "<<current_compiler_flags<< " and the coverage is" << current_lcov << endl;
-  cout << "The best complier flags in this experiments are" << best_flag_all << " and the coverage is " << best_coverage_all << endl;
+  cout << "The best complier flags in this experiments are: " << best_flag_all << " and the coverage is " << best_coverage_all << endl;
 
   return 0;
 }
