@@ -1,6 +1,6 @@
 # $1: program name
-# $2: --optimize (or null)
-# $3: --opt-flag=... (or null)
+# $2: optimize (or null)
+# $3: opt-flag (or null)
 
 echo "=============================================="
 if [ "$2" != "" ]
