@@ -76,9 +76,15 @@ int main(int argc, char* argv[]) {
   FILE *test=popen("[ ! -d \"test_result_new\" ] && mkdir test_result_new", "r");
   pclose(test);
 
-  // running klee with original optimization
+  // running klee without optimization
   string command = "./replay-flag.sh ";
-  command = command + argv[1] + " optimize > test_result_new/result_" + argv[1]+ ".txt 2>&1";
+  command = command + argv[1] + " > test_result_new/result_" + argv[1]+ ".txt 2>&1";
+  test=popen(command.c_str(), "r");
+  pclose(test);
+
+  // running klee with original optimization
+  command = "./replay-flag.sh ";
+  command = command + argv[1] + " optimize >> test_result_new/result_" + argv[1]+ ".txt 2>&1";
   test=popen(command.c_str(), "r");
   pclose(test);
 
@@ -132,12 +138,11 @@ int main(int argc, char* argv[]) {
       flag_str += compiler_flags[i];
 
 
+      cout<<"The string compiler flag is:"<<flag_str<<endl;
+
       // running klee with new flag combination
       command = "./replay-flag.sh ";
       command = command + argv[1] + " optimize " + flag_str + " >> test_result_new/result_" + argv[1]+ ".txt 2>&1";
-
-      cout<<"!!The string compiler flag is:"<<flag_str<<endl;
-
       test=popen(command.c_str(),"r");
       pclose(test);
 
@@ -238,7 +243,7 @@ int main(int argc, char* argv[]) {
         new_data->calls = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
         //cout << new_data->calls << endl;
 
-        if (flag.compare("OriginalOptimization"))
+        if (flag.compare("OriginalOptimization") && flag.compare("NoOptimization")
           dataMap[flag] = new_data;
         else
           kleeData = *new_data;
@@ -256,7 +261,7 @@ int main(int argc, char* argv[]) {
     for (std::map<string, data*>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
       cout <<"OSWALDO_FIRST:"<< it->first << endl;
       cout <<"OSWALDO_SECOND:"<< it->second->time << " " << it->second->lcov << " " << it->second->bcov << " " << it->second->once << " " << it->second->calls << endl;
-      if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare(previous_best_flag)) {
+      if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare("NoOptimization") && (it->first).compare(previous_best_flag)) {
         best_lcov_val = it->second->lcov;
         best_compiler_flag=it->first;
       }
