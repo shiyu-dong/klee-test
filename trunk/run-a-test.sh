@@ -1,3 +1,7 @@
+# $1: program name
+# $2: optimize (or null)
+# $3: opt-flag (or null)
+
 CMD=""
 if [ "$3" != "" ]
 then
@@ -25,7 +29,7 @@ CMD="$CMD --simplify-sym-indices \
   --max-sym-array-size=4096 \
   --max-instruction-time=30. \
   --watchdog \
-  --max-time=120. \
+  --max-time=300. \
   --max-memory-inhibit=false \
   --max-static-fork-pct=1 \
   --max-static-solve-pct=1 \
@@ -37,9 +41,9 @@ CMD="$CMD --simplify-sym-indices \
   --batch-instructions=10000"
 
 if [ "$2" != "" ]; then
-  CMD="$CMD $2"
+  CMD="$CMD --$2"
   if [ "$3" != "" ]; then
-    CMD="$CMD $3"
+    CMD="$CMD --opt-flag=$3"
   fi
 fi
 CMD="$CMD ../$1.bc \
