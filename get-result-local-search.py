@@ -44,13 +44,13 @@ while True:
         elif line.find("optimiz") != -1:
           if line.find("no optimization") != -1:
             opt = "NoOptimization"
-            print opt
+            #print opt
           elif line.find("only --optimize, no --opt-flag") != -1:
             opt = "OptimizeOnly"
-            print opt
+            #print opt
           elif line.find("original optimization") != -1:
             opt = "OriginalOptimization"
-            print opt
+            #print opt
           else:
             opt = line.split()[3]
             # sys.stdout.write(opt)
