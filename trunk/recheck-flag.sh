@@ -14,6 +14,5 @@ fi
 # ./replay-flag.sh fold optimize SCCP,InstructionCombining,GVN,LoopUnswitch,AggressiveDCE,LoopUnroll,DeadStoreElimination&>> test_result_new/result_fold.txt
 # ./replay-flag.sh tr optimize &> test_result_new/result_tr.txt
 # ./replay-flag.sh tr optimize SCCP,LoopRotate,ScalarReplAggregates,GVN,CFGSimplification,PruneEH &>> test_result_new/result_tr.txt
-./replay-flag.sh base64 &> test_result_new/result_base64.txt
-./replay-flag.sh base64 optimize &>> test_result_new/result_base64.txt
-./replay-flag.sh base64 optimize InstructionCombining &>> test_result_new/result_base64.txt
+./replay-flag.sh tr optimize GVN &> test_result_new/result_tr.txt
+./replay-flag.sh tr optimize InstructionCombining &>> test_result_new/result_tr.txt

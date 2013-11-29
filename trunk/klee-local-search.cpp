@@ -243,7 +243,7 @@ int main(int argc, char* argv[]) {
         new_data->calls = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
         //cout << new_data->calls << endl;
 
-        if (flag.compare("OriginalOptimization") && flag.compare("NoOptimization")
+        if (flag.compare("OriginalOptimization") && flag.compare("NoOptimization"))
           dataMap[flag] = new_data;
         else
           kleeData = *new_data;
