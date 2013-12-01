@@ -70,6 +70,8 @@ int main(int argc, char* argv[]) {
   double current_lcov=-1;
   string best_flag_all="";
   double best_coverage_all=-1;
+  int not_change_count = 0;
+  double delta = 1e-6;
   int i;
 
   // Create test_result_new folder if it doesn't exist
@@ -266,11 +268,17 @@ int main(int argc, char* argv[]) {
         best_compiler_flag=it->first;
       }
     }
+
     cout<<"The best lcov this iter is:"<<best_lcov_val<<endl;
     cout<<"The current lcov so far is:"<<current_lcov<<endl;
     cout<<"The flags so far are: "<<current_compiler_flags<<endl;
     cout<<"The best flag for this iteration is:"<<best_compiler_flag<<endl;
 
+    // see if any change happened compared to previous iteration
+    if (best_lcov_val - current_lcov < delta)
+      not_change_count++;
+    else
+      not_change_count = 0;
 
     current_lcov=best_lcov_val;
     if(best_compiler_flag.compare("")) {
@@ -298,9 +306,15 @@ int main(int argc, char* argv[]) {
     test=popen(command.c_str(), "r");
 
     pclose(test);
+
+    // if has not changed for two iterations, break
+    if (not_change_count >= 2) {
+      cout << "Coverage has not changed for two iterations, stop\n";
+      break;
+    }
   }
 
-  cout<<"The best compiler flags after 10 iterations are: "<<current_compiler_flags<< " and the coverage is" << current_lcov << endl;
+  cout<< "The best compiler flags after 10 iterations (or break earlier) are: "<<current_compiler_flags<< " and the coverage is" << current_lcov << endl;
   cout << "The best complier flags in this experiments are: " << best_flag_all << " and the coverage is " << best_coverage_all << endl;
 
   return 0;
