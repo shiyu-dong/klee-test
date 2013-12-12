@@ -13,9 +13,6 @@
 
 using namespace std;
 
-
-int num_compiler_flags=33;
-
 // FLAGS THAT INDIVIDUALLY HAVE SOME EFFECT ON THE BENCHMARKS:
 // 1) base64: IndvarSimplify, InstructionCombining.
 // 2) cut: IndVarSimplify.
@@ -27,49 +24,66 @@ int num_compiler_flags=33;
 // 8) tr: AggressiveDCE, CondPropagation, DeadArgElimination, FunctionInlining, IndVarSimplify, JumpThreading, LoopIndexSplit, LoopRotate, LoopUnswitch.
 // 9) tsort:  None.
 // 10) unexpand: IndVarSimplify, InstructionCombining.
+// 11) small benchmarks: InstructionCombining, PruneEH, ScalarReplAggregates
 
 
-
-
-// Keeping flags that affect the coverage for the specific benchmarks
-string compiler_flags[]= {
-  "AggressiveDCE",
-  "ArgumentPromotion",
-  "CFGSimplification",
-  "CondPropagation",
-  "ConstantMerge",
-  "DeadArgElimination",
-  "DeadStoreElimination",
-  "DeadTypeElimination",
-  "FunctionAttrs",
-  "FunctionInlining",
-  "GlobalDCE",
-  "GlobalOptimizer",
-  "GVN",
-  "IndVarSimplify",
-  "InstructionCombining", 
-  "IPConstantPropagation",
-  "JumpThreading",
-  "LICM",
-  "LoopDeletion",
-  "LoopIndexSplit",
-  "LoopRotate",
-  "LoopUnroll",
-  "LoopUnswitch",
-  "MemCpyOpt",
-  "PromoteMemoryToRegister",
-  "PruneEH",
-  "RaiseAllocation",
-  "Reassociate",
-  "ScalarReplAggregates",
-  "SCCP",
-  "SimplifyLibCalls",
-  "StripDeadPrototypes",
-  "TailCallElimination"
-};
-
+// // Keeping flags that affect the coverage for the specific benchmarks
+// string compiler_flags[]= {
+//   "AggressiveDCE",
+//   "ArgumentPromotion",
+//   "CFGSimplification",
+//   "CondPropagation",
+//   "ConstantMerge",
+//   "DeadArgElimination",
+//   "DeadStoreElimination",
+//   "DeadTypeElimination",
+//   "FunctionAttrs",
+//   "FunctionInlining",
+//   "GlobalDCE",
+//   "GlobalOptimizer",
+//   "GVN",
+//   "IndVarSimplify",
+//   "InstructionCombining", 
+//   "IPConstantPropagation",
+//   "JumpThreading",
+//   "LICM",
+//   "LoopDeletion",
+//   "LoopIndexSplit",
+//   "LoopRotate",
+//   "LoopUnroll",
+//   "LoopUnswitch",
+//   "MemCpyOpt",
+//   "PromoteMemoryToRegister",
+//   "PruneEH",
+//   "RaiseAllocation",
+//   "Reassociate",
+//   "ScalarReplAggregates",
+//   "SCCP",
+//   "SimplifyLibCalls",
+//   "StripDeadPrototypes",
+//   "TailCallElimination"
+// };
+//
+// int num_compiler_flags=33;
 
 // The lines of code for each benchmark is:
+
+string compiler_flags[]= {
+  "AggressiveDCE",
+  "CondPropagation",
+  "DeadArgElimination",
+  "FunctionInlining",
+  "IndVarSimplify",
+  "InstructionCombining",
+  "JumpThreading",
+  "LoopIndexSplit",
+  "LoopRotate",
+  "LoopUnswitch",
+  "PruneEH",
+  "ScalarReplAggregates",
+};
+
+int num_compiler_flags=12;
 
 // mknod:   80 (small)
 // base64: 105 (small)
@@ -84,22 +98,30 @@ string compiler_flags[]= {
 
 
 
+// string benchmarks[]= {
+//   "base64",
+//   "cut",
+//   "dd",
+//   "du",
+//   "expand",
+//   "fold",
+//   "mknod",
+//   "tr",
+//   "tsort",
+//   "unexpand"
+// };
+//
+// int num_benchmarks=10;
+
 string benchmarks[]= {
-  "base64",
-  "cut",
-  "dd",
-  "du",
-  "expand",
-  "fold",
-  "mknod",
-  "tr",
-  "tsort",
-  "unexpand"
+  "cut", // medium
+  "dd", // large
+  "du", // medium
+  "expand", // small
+  "tr", // large
 };
 
-int num_benchmarks=10;
-
-
+int num_benchmarks=5;
 
 
 // used to store the parsed information
@@ -140,7 +162,7 @@ void initializeBenchmarkWeight() {
 
 
   double total=0.0;
-  
+
   // Maximum percentage that can be obtained across all benchmarks.
   for (std::map<string, double>::iterator it = benchmarkWeight.begin(); it != benchmarkWeight.end(); ++it) 
     total+=100.00*(it->second);
@@ -148,7 +170,7 @@ void initializeBenchmarkWeight() {
   // Normalizing the weights.
   for (std::map<string, double>::iterator it = benchmarkWeight.begin(); it != benchmarkWeight.end(); ++it) 
     benchmarkWeight[it->first]=(it->second)/total;
-  
+
 }
 
 
@@ -218,18 +240,21 @@ int main(int argc, char* argv[]) {
   string previous_best_flag = "";
 
   int iters=0;
-  // Arbitrarilly asking for 10 flags.
-  while(iters<10) {
+  // // Arbitrarilly asking for 10 flags.
+  // while(iters<10) {
+
+  // Arbitrarilly asking for 5 flags.
+  while(iters<5) {
     iters++;
 
     // hash map that maps benchmark names to it's data map.
     map<string, map<string,data*> > benchmarkMap;
 
-      // hash map that maps benchmark names to it's best flag.
-      map<string, string> benchmarkBestFlagMap;
+    // hash map that maps benchmark names to it's best flag.
+    map<string, string> benchmarkBestFlagMap;
 
-      // hash map that maps benchmark names to it's best line-coverage value.
-      map<string, float> benchmarkLCovMap;
+    // hash map that maps benchmark names to it's best line-coverage value.
+    map<string, float> benchmarkLCovMap;
 
     // Do a clean here
     test=popen("./check-all.sh --clean","r");
@@ -237,7 +262,7 @@ int main(int argc, char* argv[]) {
 
     // Trying all optimizations one at a time.
     for(i=0;i<num_compiler_flags;++i) {
-       // One optimization.
+      // One optimization.
 
       string flag_str="";
       if(current_compiler_flags.compare("")) {
@@ -252,10 +277,10 @@ int main(int argc, char* argv[]) {
       // running klee with new flag combination for every benchmark
       int j;
       for(j=0;j<num_benchmarks;++j) {
-	command = "./replay-flag.sh ";
-	command = command + benchmarks[j] + " optimize " + flag_str + " >> test_result_new/result_" + benchmarks[j]+ ".txt 2>&1";
-	test=popen(command.c_str(),"r");
-	pclose(test);
+        command = "./replay-flag.sh ";
+        command = command + benchmarks[j] + " optimize " + flag_str + " >> test_result_new/result_" + benchmarks[j]+ ".txt 2>&1";
+        test=popen(command.c_str(),"r");
+        pclose(test);
       }
 
       //// running klee-stats
@@ -278,7 +303,6 @@ int main(int argc, char* argv[]) {
       //command = command + argv[1] + " >> ../../obj-llvm/src/klee-test/test_result_new/result_" + argv[1] + ".txt";
       //test=popen(command.c_str(),"r");
       //pclose(test);
-
     }
 
     int j;
@@ -293,11 +317,11 @@ int main(int argc, char* argv[]) {
     }
 
     /*
-    if (argc <= 1) {
-      cerr << "expecting program name.\n";
-      exit(1);
-    }
-    */
+       if (argc <= 1) {
+       cerr << "expecting program name.\n";
+       exit(1);
+       }
+       */
 
     for(j=0;j<num_benchmarks;++j) {
 
@@ -314,80 +338,80 @@ int main(int argc, char* argv[]) {
       string line;
       cout<<"BEFORE OSWALDO:"<<filename<<endl;
       if (myfile.is_open()) {
-	cout<<"AFTER OSWALDO:"<<filename<<endl;
-	while (getline (myfile,line)) {
-	  cout<<"ENTERED OSWALDO"<<endl;
-	  data* new_data = new data;
-	  string flag;
+        cout<<"AFTER OSWALDO:"<<filename<<endl;
+        while (getline (myfile,line)) {
+          cout<<"ENTERED OSWALDO"<<endl;
+          data* new_data = new data;
+          string flag;
 
-	  // Ugly but useful code to parse from the csv files
-	  // get flag
-	  cout <<"The line is:"<<  line << endl;
-	  int pos1 = line.find('"');
-	  int pos2 = line.find('"', pos1 + 1);
-	  flag = line.substr(pos1 + 1, pos2 - 1);
-	  int pos3 = flag.find_last_of(',');
-	  if (pos3 != string::npos)
-	    flag = flag.substr(pos3 + 1);
-	  line = line.substr(pos2 + 2);
+          // Ugly but useful code to parse from the csv files
+          // get flag
+          cout <<"The line is:"<<  line << endl;
+          int pos1 = line.find('"');
+          int pos2 = line.find('"', pos1 + 1);
+          flag = line.substr(pos1 + 1, pos2 - 1);
+          int pos3 = flag.find_last_of(',');
+          if (pos3 != string::npos)
+            flag = flag.substr(pos3 + 1);
+          line = line.substr(pos2 + 2);
 
-	  // get time
-	  pos1 = line.find('"');
-	  pos2 = line.find('"', pos1 + 1);
-	  new_data->time = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
-	  line = line.substr(pos2 + 2);
-	  //cout << new_data->time << endl;
+          // get time
+          pos1 = line.find('"');
+          pos2 = line.find('"', pos1 + 1);
+          new_data->time = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
+          line = line.substr(pos2 + 2);
+          //cout << new_data->time << endl;
 
-	  // get lcov
-	  pos1 = line.find('"');
-	  pos2 = line.find('"', pos1 + 1);
-	  new_data->lcov = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
-	  line = line.substr(pos2 + 2);
-	  //cout << new_data->lcov << endl;
+          // get lcov
+          pos1 = line.find('"');
+          pos2 = line.find('"', pos1 + 1);
+          new_data->lcov = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
+          line = line.substr(pos2 + 2);
+          //cout << new_data->lcov << endl;
 
-	  // get bcov
-	  pos1 = line.find('"');
-	  pos2 = line.find('"', pos1 + 1);
-	  new_data->bcov = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
-	  line = line.substr(pos2 + 2);
-	  //cout << new_data->bcov << endl;
+          // get bcov
+          pos1 = line.find('"');
+          pos2 = line.find('"', pos1 + 1);
+          new_data->bcov = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
+          line = line.substr(pos2 + 2);
+          //cout << new_data->bcov << endl;
 
-	  // get once
-	  pos1 = line.find('"');
-	  pos2 = line.find('"', pos1 + 1);
-	  new_data->once = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
-	  line = line.substr(pos2 + 2);
-	  //cout << new_data->once << endl;
+          // get once
+          pos1 = line.find('"');
+          pos2 = line.find('"', pos1 + 1);
+          new_data->once = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
+          line = line.substr(pos2 + 2);
+          //cout << new_data->once << endl;
 
-	  // get calls
-	  pos1 = line.find('"');
-	  pos2 = line.find('"', pos1 + 1);
-	  new_data->calls = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
-	  //cout << new_data->calls << endl;
+          // get calls
+          pos1 = line.find('"');
+          pos2 = line.find('"', pos1 + 1);
+          new_data->calls = atof(line.substr(pos1 + 1, pos2 - 1).c_str());
+          //cout << new_data->calls << endl;
 
-	  if (flag.compare("OriginalOptimization") && flag.compare("NoOptimization"))
-	    dataMap[flag] = new_data;
-	  else
-	    //	    kleeData = *new_data;
-	    dataMap[flag]= new_data;
-	}
-	myfile.close();
+          if (flag.compare("OriginalOptimization") && flag.compare("NoOptimization"))
+            dataMap[flag] = new_data;
+          else
+            //	    kleeData = *new_data;
+            dataMap[flag]= new_data;
+        }
+        myfile.close();
       }
       else {
-	cout << "Error. Unable to open file";
-	exit(1);
+        cout << "Error. Unable to open file";
+        exit(1);
       }
 
       cout << dataMap.size() << endl;
       double best_lcov_val=-1;
       string best_compiler_flag="";
       for (std::map<string, data*>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
-	cout <<"OSWALDO_FIRST:"<< it->first << endl;
-	cout <<"OSWALDO_SECOND:"<< it->second->time << " " << it->second->lcov << " " << it->second->bcov << " " << it->second->once << " " << it->second->calls << endl;
-	if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare("NoOptimization") && (it->first).compare(previous_best_flag)) {
-	  best_lcov_val = it->second->lcov;
-	  best_compiler_flag=it->first;
-	}
+        cout <<"OSWALDO_FIRST:"<< it->first << endl;
+        cout <<"OSWALDO_SECOND:"<< it->second->time << " " << it->second->lcov << " " << it->second->bcov << " " << it->second->once << " " << it->second->calls << endl;
+        if(it->second->lcov > best_lcov_val && (it->first).compare("OriginalOptimization") && (it->first).compare("NoOptimization") && (it->first).compare(previous_best_flag)) {
+          best_lcov_val = it->second->lcov;
+          best_compiler_flag=it->first;
+        }
       }
 
       cout<<"The best lcov this iter is:"<<best_lcov_val<<endl;
@@ -399,29 +423,29 @@ int main(int argc, char* argv[]) {
       /*
       // see if any change happened compared to previous iteration
       if (best_lcov_val - current_lcov < delta)
-	not_change_count++;
+      not_change_count++;
       else
-	not_change_count = 0;
+      not_change_count = 0;
       */
 
       // OSWALDO: Fix this.
       /*
-      current_lcov=best_lcov_val;
-      if(best_compiler_flag.compare("")) {
-	if(current_compiler_flags.compare(""))
-	  current_compiler_flags+=",";
-	current_compiler_flags+=best_compiler_flag;
-	previous_best_flag = best_compiler_flag;
-      }
+         current_lcov=best_lcov_val;
+         if(best_compiler_flag.compare("")) {
+         if(current_compiler_flags.compare(""))
+         current_compiler_flags+=",";
+         current_compiler_flags+=best_compiler_flag;
+         previous_best_flag = best_compiler_flag;
+         }
 
-      if (best_lcov_val > best_coverage_all) {
-	best_coverage_all=best_lcov_val;
-	best_flag_all=current_compiler_flags;
-      }
-      */
+         if (best_lcov_val > best_coverage_all) {
+         best_coverage_all=best_lcov_val;
+         best_flag_all=current_compiler_flags;
+         }
+         */
 
       benchmarkMap[benchmarks[j]]=dataMap;
-      
+
       benchmarkBestFlagMap[benchmarks[j]]=best_compiler_flag;
 
       benchmarkLCovMap[benchmarks[j]]=best_lcov_val;
@@ -445,8 +469,8 @@ int main(int argc, char* argv[]) {
 
       // if has not changed for two iterations, break
       if (not_change_count >= 2) {
-	cout << "Coverage has not changed for two iterations, stop\n";
-	break;
+      cout << "Coverage has not changed for two iterations, stop\n";
+      break;
       }
       */
 
@@ -467,9 +491,9 @@ int main(int argc, char* argv[]) {
       string benchmark=benchmarks[j];
       map<string,data*> tempDataMap=benchmarkMap[benchmark];
       for(k=0;k<num_compiler_flags;++k) {
-	string compiler_flag=compiler_flags[k];
-	data *dataValue=tempDataMap[compiler_flag];
-	flagValue[compiler_flag]+=benchmarkWeight[benchmark]*(dataValue->lcov);
+        string compiler_flag=compiler_flags[k];
+        data *dataValue=tempDataMap[compiler_flag];
+        flagValue[compiler_flag]+=benchmarkWeight[benchmark]*(dataValue->lcov);
       }
     }
 
@@ -478,12 +502,12 @@ int main(int argc, char* argv[]) {
 
     for (std::map<string, double>::iterator it = flagValue.begin(); it != flagValue.end(); ++it) 
       if(it->second > best_flag_value) {
-	best_flag_value = it->second;
-	best_flag_name = it->first;
+        best_flag_value = it->second;
+        best_flag_name = it->first;
       }
 
     cout<<"The best flag is "<<best_flag_name<<" with value "<<best_flag_value<<endl;
-    
+
     if(current_compiler_flags.compare(""))
       current_compiler_flags+=",";
     current_compiler_flags+=best_flag_name;
