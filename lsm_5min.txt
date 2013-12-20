@@ -1,0 +1,738 @@
+Before first open
+The string compiler flag is:AggressiveDCE
+The string compiler flag is:DeadArgElimination
+The string compiler flag is:IndVarSimplify
+The string compiler flag is:InstructionCombining
+The string compiler flag is:LoopRotate
+The string compiler flag is:LoopUnroll
+The string compiler flag is:LoopUnswitch
+The string compiler flag is:MemCpyOpt
+The string compiler flag is:PromoteMemoryToRegister
+The string compiler flag is:ScalarReplAggregates
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+csv/cut.csv
+BEFORE OSWALDO:csv/cut.csv
+AFTER OSWALDO:csv/cut.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.11","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.02","48.99","52.42","31.85","28.00"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.02","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.13","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.10","47.64","51.61","30.24","25.60"
+ENTERED OSWALDO
+The line is:"InstructionCombining","300.07","48.65","52.42","31.45","26.40"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.11","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.08","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.02","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.06","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.01","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.04","48.65","51.61","31.85","24.80"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.02 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.13 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.1 47.64 51.61 30.24 25.6
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.07 48.65 52.42 31.45 26.4
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.11 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.08 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.02 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.06 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.11 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.02 48.99 52.42 31.85 28
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.01 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.04 48.65 51.61 31.85 24.8
+The flags so far are: 
+The best flag for this iteration is:AggressiveDCE
+csv/dd.csv
+BEFORE OSWALDO:csv/dd.csv
+AFTER OSWALDO:csv/dd.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.12","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.05","9.63","11.17","6.07","11.25"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.32","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.10","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.11","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"InstructionCombining","303.02","9.80","11.17","6.07","11.67"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.10","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.13","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.02","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.10","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","301.84","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.03","10.34","11.17","6.80","12.92"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.32 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.1 10.34 11.17 6.55 12.92
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.11 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:303.02 9.8 11.17 6.07 11.67
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.1 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.13 10.34 11.17 6.55 12.92
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.02 10.34 11.17 6.55 12.92
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.1 10.34 11.17 6.55 12.92
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.12 10.34 11.17 6.55 12.92
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.05 9.63 11.17 6.07 11.25
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:301.84 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.03 10.34 11.17 6.8 12.92
+The flags so far are: 
+The best flag for this iteration is:AggressiveDCE
+csv/du.csv
+BEFORE OSWALDO:csv/du.csv
+AFTER OSWALDO:csv/du.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.18","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","301.29","55.30","70.53","42.11","37.82"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.02","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.18","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.04","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"InstructionCombining","300.18","41.72","58.95","28.42","30.25"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.08","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.02","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.08","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.11","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.06","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.10","59.60","71.58","43.68","45.38"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.02 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.18 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.04 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.18 41.72 58.95 28.42 30.25
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.08 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.02 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.08 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.11 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.18 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:301.29 55.3 70.53 42.11 37.82
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.06 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.1 59.6 71.58 43.68 45.38
+The flags so far are: 
+The best flag for this iteration is:PromoteMemoryToRegister
+csv/tr.csv
+BEFORE OSWALDO:csv/tr.csv
+AFTER OSWALDO:csv/tr.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.07","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.06","34.45","36.60","21.13","22.34"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.07","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.10","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.06","39.91","45.75","30.07","23.40"
+ENTERED OSWALDO
+The line is:"InstructionCombining","300.47","4.70","5.01","3.70","5.85"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.07","34.29","36.17","20.70","20.74"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.14","25.64","27.89","17.21","17.55"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.05","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.09","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.05","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.11","34.14","36.17","20.70","21.28"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.07 25.34 27.45 16.99 17.55
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.1 25.34 27.45 16.99 17.55
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.06 39.91 45.75 30.07 23.4
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.47 4.7 5.01 3.7 5.85
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.07 34.29 36.17 20.7 20.74
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.14 25.64 27.89 17.21 17.55
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.05 25.34 27.45 16.99 17.55
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.09 25.34 27.45 16.99 17.55
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.07 25.34 27.45 16.99 17.55
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.06 34.45 36.6 21.13 22.34
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.05 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.11 34.14 36.17 20.7 21.28
+The flags so far are: 
+The best flag for this iteration is:IndVarSimplify
+csv/unexpand.csv
+BEFORE OSWALDO:csv/unexpand.csv
+AFTER OSWALDO:csv/unexpand.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.05","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.04","48.45","55.22","39.55","32.26"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.01","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.09","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.09","48.45","55.22","39.55","32.26"
+ENTERED OSWALDO
+The line is:"InstructionCombining","301.51","56.70","73.13","47.76","33.87"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.15","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.08","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.09","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.09","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.07","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.08","44.85","52.24","35.82","25.81"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.01 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.09 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.09 48.45 55.22 39.55 32.26
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:301.51 56.7 73.13 47.76 33.87
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.15 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.08 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.09 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.09 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.05 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.04 48.45 55.22 39.55 32.26
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.07 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.08 44.85 52.24 35.82 25.81
+The flags so far are: 
+The best flag for this iteration is:InstructionCombining
+Starting value flag counting
+Flag AggressiveDCE has value 0.205841
+Flag DeadArgElimination has value 0.205841
+Flag IndVarSimplify has value 0.231271
+Flag InstructionCombining has value 0.165259
+Flag LoopRotate has value 0.221635
+Flag LoopUnroll has value 0.206371
+Flag LoopUnswitch has value 0.205841
+Flag MemCpyOpt has value 0.205841
+Flag PromoteMemoryToRegister has value 0.232229
+Flag ScalarReplAggregates has value 0.232229
+The best flag is PromoteMemoryToRegister with value 0.232229
+The best compiler flags after 1 iterations are: PromoteMemoryToRegister
+The coverage by benchmark is:
+cut: 48.65
+dd: 10.34
+du: 59.6
+tr: 34.14
+unexpand: 44.85
+Before first open
+The string compiler flag is:PromoteMemoryToRegister,AggressiveDCE
+The string compiler flag is:PromoteMemoryToRegister,DeadArgElimination
+The string compiler flag is:PromoteMemoryToRegister,IndVarSimplify
+The string compiler flag is:PromoteMemoryToRegister,InstructionCombining
+The string compiler flag is:PromoteMemoryToRegister,LoopRotate
+The string compiler flag is:PromoteMemoryToRegister,LoopUnroll
+The string compiler flag is:PromoteMemoryToRegister,LoopUnswitch
+The string compiler flag is:PromoteMemoryToRegister,MemCpyOpt
+The string compiler flag is:PromoteMemoryToRegister,PromoteMemoryToRegister
+The string compiler flag is:PromoteMemoryToRegister,ScalarReplAggregates
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+After first open
+Before second open
+After second open
+csv/cut.csv
+BEFORE OSWALDO:csv/cut.csv
+AFTER OSWALDO:csv/cut.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.11","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.02","48.99","52.42","31.85","28.00"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.02","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.13","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.10","47.64","51.61","30.24","25.60"
+ENTERED OSWALDO
+The line is:"InstructionCombining","300.07","48.65","52.42","31.45","26.40"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.11","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.08","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.02","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.06","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.01","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.04","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,AggressiveDCE","300.13","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,DeadArgElimination","300.07","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,IndVarSimplify","300.10","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,InstructionCombining","300.02","48.65","52.42","31.45","26.40"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopRotate","300.13","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnroll","300.11","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnswitch","300.14","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,MemCpyOpt","300.16","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,PromoteMemoryToRegister","300.18","48.65","51.61","31.85","24.80"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,ScalarReplAggregates","300.06","48.65","51.61","31.85","24.80"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.13 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.07 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.1 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.02 48.65 52.42 31.45 26.4
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.13 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.11 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.14 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.16 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.11 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.02 48.99 52.42 31.85 28
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.18 48.65 51.61 31.85 24.8
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.06 48.65 51.61 31.85 24.8
+The flags so far are: PromoteMemoryToRegister
+The best flag for this iteration is:AggressiveDCE
+csv/dd.csv
+BEFORE OSWALDO:csv/dd.csv
+AFTER OSWALDO:csv/dd.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.12","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.05","9.63","11.17","6.07","11.25"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.32","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.10","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.11","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"InstructionCombining","303.02","9.80","11.17","6.07","11.67"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.10","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.13","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.02","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.10","10.34","11.17","6.55","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","301.84","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.03","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,AggressiveDCE","300.04","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,DeadArgElimination","300.04","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,IndVarSimplify","300.01","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,InstructionCombining","300.27","9.63","11.17","6.07","11.25"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopRotate","301.78","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnroll","300.01","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnswitch","300.03","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,MemCpyOpt","300.14","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,PromoteMemoryToRegister","300.03","10.34","11.17","6.80","12.92"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,ScalarReplAggregates","300.17","10.34","11.17","6.80","12.92"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.04 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.04 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.01 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.27 9.63 11.17 6.07 11.25
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:301.78 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.01 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.03 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.14 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.12 10.34 11.17 6.55 12.92
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.05 9.63 11.17 6.07 11.25
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.03 10.34 11.17 6.8 12.92
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.17 10.34 11.17 6.8 12.92
+The flags so far are: PromoteMemoryToRegister
+The best flag for this iteration is:AggressiveDCE
+csv/du.csv
+BEFORE OSWALDO:csv/du.csv
+AFTER OSWALDO:csv/du.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.18","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","301.29","55.30","70.53","42.11","37.82"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.02","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.18","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.04","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"InstructionCombining","300.18","41.72","58.95","28.42","30.25"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.08","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.02","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.08","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.11","49.34","67.37","37.89","36.13"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.06","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.10","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,AggressiveDCE","300.07","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,DeadArgElimination","300.07","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,IndVarSimplify","300.07","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,InstructionCombining","301.43","55.30","70.53","42.11","37.82"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopRotate","300.05","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnroll","300.01","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnswitch","300.02","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,MemCpyOpt","300.10","59.60","71.58","43.68","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,PromoteMemoryToRegister","300.08","60.60","71.58","44.21","45.38"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,ScalarReplAggregates","300.08","59.60","71.58","43.68","45.38"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.07 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.07 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.07 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:301.43 55.3 70.53 42.11 37.82
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.05 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.01 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.02 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.1 59.6 71.58 43.68 45.38
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.18 49.34 67.37 37.89 36.13
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:301.29 55.3 70.53 42.11 37.82
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.08 60.6 71.58 44.21 45.38
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.08 59.6 71.58 43.68 45.38
+The flags so far are: PromoteMemoryToRegister
+The best flag for this iteration is:PromoteMemoryToRegister
+csv/tr.csv
+BEFORE OSWALDO:csv/tr.csv
+AFTER OSWALDO:csv/tr.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.07","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.06","34.45","36.60","21.13","22.34"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.07","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.10","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.06","39.91","45.75","30.07","23.40"
+ENTERED OSWALDO
+The line is:"InstructionCombining","300.47","4.70","5.01","3.70","5.85"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.07","34.29","36.17","20.70","20.74"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.14","25.64","27.89","17.21","17.55"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.05","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.09","25.34","27.45","16.99","17.55"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.05","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.11","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,AggressiveDCE","300.03","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,DeadArgElimination","300.01","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,IndVarSimplify","300.10","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,InstructionCombining","300.08","34.14","36.60","20.92","22.34"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopRotate","300.06","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnroll","300.07","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnswitch","300.11","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,MemCpyOpt","300.09","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,PromoteMemoryToRegister","300.06","34.14","36.17","20.70","21.28"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,ScalarReplAggregates","300.06","34.14","36.17","20.70","21.28"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.03 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.01 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.1 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.08 34.14 36.6 20.92 22.34
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.06 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.07 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.11 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.09 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.07 25.34 27.45 16.99 17.55
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.06 34.45 36.6 21.13 22.34
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.06 34.14 36.17 20.7 21.28
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.06 34.14 36.17 20.7 21.28
+The flags so far are: PromoteMemoryToRegister
+The best flag for this iteration is:AggressiveDCE
+csv/unexpand.csv
+BEFORE OSWALDO:csv/unexpand.csv
+AFTER OSWALDO:csv/unexpand.csv
+ENTERED OSWALDO
+The line is:"NoOptimization","300.05","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"OriginalOptimization","300.04","48.45","55.22","39.55","32.26"
+ENTERED OSWALDO
+The line is:"AggressiveDCE","300.01","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"DeadArgElimination","300.09","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"IndVarSimplify","300.09","48.45","55.22","39.55","32.26"
+ENTERED OSWALDO
+The line is:"InstructionCombining","301.51","56.70","73.13","47.76","33.87"
+ENTERED OSWALDO
+The line is:"LoopRotate","300.15","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"LoopUnroll","300.08","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"LoopUnswitch","300.09","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"MemCpyOpt","300.09","46.91","59.70","38.06","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister","300.07","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"ScalarReplAggregates","300.08","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,AggressiveDCE","300.12","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,DeadArgElimination","300.08","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,IndVarSimplify","300.08","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,InstructionCombining","300.08","49.48","53.73","39.55","35.48"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopRotate","300.02","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnroll","300.05","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,LoopUnswitch","300.04","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,MemCpyOpt","300.04","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,PromoteMemoryToRegister","300.12","44.85","52.24","35.82","25.81"
+ENTERED OSWALDO
+The line is:"PromoteMemoryToRegister,ScalarReplAggregates","300.03","44.85","52.24","35.82","25.81"
+12
+OSWALDO_FIRST:AggressiveDCE
+OSWALDO_SECOND:300.12 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:DeadArgElimination
+OSWALDO_SECOND:300.08 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:IndVarSimplify
+OSWALDO_SECOND:300.08 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:InstructionCombining
+OSWALDO_SECOND:300.08 49.48 53.73 39.55 35.48
+OSWALDO_FIRST:LoopRotate
+OSWALDO_SECOND:300.02 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:LoopUnroll
+OSWALDO_SECOND:300.05 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:LoopUnswitch
+OSWALDO_SECOND:300.04 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:MemCpyOpt
+OSWALDO_SECOND:300.04 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:NoOptimization
+OSWALDO_SECOND:300.05 46.91 59.7 38.06 25.81
+OSWALDO_FIRST:OriginalOptimization
+OSWALDO_SECOND:300.04 48.45 55.22 39.55 32.26
+OSWALDO_FIRST:PromoteMemoryToRegister
+OSWALDO_SECOND:300.12 44.85 52.24 35.82 25.81
+OSWALDO_FIRST:ScalarReplAggregates
+OSWALDO_SECOND:300.03 44.85 52.24 35.82 25.81
+The flags so far are: PromoteMemoryToRegister
+The best flag for this iteration is:InstructionCombining
+Starting value flag counting
+Flag AggressiveDCE has value 0.232229
+Flag DeadArgElimination has value 0.232229
+Flag IndVarSimplify has value 0.232229
+Flag InstructionCombining has value 0.228641
+Flag LoopRotate has value 0.232229
+Flag LoopUnroll has value 0.232229
+Flag LoopUnswitch has value 0.232229
+Flag MemCpyOpt has value 0.232229
+Flag PromoteMemoryToRegister has value 0.233406
+Flag ScalarReplAggregates has value 0.232229
+The best flag is PromoteMemoryToRegister with value 0.233406
+The best compiler flags after 2 iterations are: PromoteMemoryToRegister,PromoteMemoryToRegister
+The coverage by benchmark is:
+cut: 48.65
+dd: 10.34
+du: 60.6
+tr: 34.14
+unexpand: 44.85
+Multibenchmark coverage value has not changed for two iterations, stop
+The best compiler flags after 10 iterations (or break earlier) are: PromoteMemoryToRegister,PromoteMemoryToRegister and the coverage is-1
+The coverage by benchmark is:
+cut: 48.65
+dd: 10.34
+du: 60.6
+tr: 34.14
+unexpand: 44.85
