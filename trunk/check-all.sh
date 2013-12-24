@@ -1,9 +1,9 @@
 #!/bin/bash
 #PROGRAMS="csplit date expand factor fold join tr seq pr mknod"
 #PROGRAMS="base64 cut dd du expand fold mknod tr tsort unexpand"
-PROGRAMS="base64 basename chcon cksum comm cut dd dircolors dirname du env \
-  expand expr fold groups link logname mkdir mkfifo mknod nice nl wc unlink \
-  unexpand tsort tr touch tee sync sum split sleep setuidgid rmdir readlink \
+PROGRAMS="basename chcon cksum comm dircolors dirname env \
+  expr groups link logname mkdir mkfifo nice nl wc unlink \
+  touch tee sync sum split sleep setuidgid rmdir readlink \
   printf pathchk paste od"
 
 if [ "$1" == "--clean" ]
