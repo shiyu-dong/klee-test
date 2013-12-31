@@ -68,41 +68,63 @@ then
   gcov -b -c $1
   cd ../../obj-llvm/src/klee-test
 
-  # with one opt-flag
+  # # with one opt-flag
+  # for OPT in \
+  #   AggressiveDCE \
+  #   ArgumentPromotion \
+  #   CFGSimplification \
+  #   CondPropagation \
+  #   ConstantMerge \
+  #   DeadArgElimination \
+  #   DeadStoreElimination \
+  #   DeadTypeElimination \
+  #   FunctionAttrs \
+  #   FunctionInlining \
+  #   GlobalDCE \
+  #   GlobalOptimizer \
+  #   GVN \
+  #   IndVarSimplify \
+  #   InstructionCombining \
+  #   IPConstantPropagation \
+  #   JumpThreading \
+  #   LICM \
+  #   LoopDeletion \
+  #   LoopIndexSplit \
+  #   LoopRotate \
+  #   LoopUnroll \
+  #   LoopUnswitch \
+  #   MemCpyOpt \
+  #   PromoteMemoryToRegister \
+  #   PruneEH \
+  #   RaiseAllocation \
+  #   Reassociate \
+  #   ScalarReplAggregates \
+  #   SCCP \
+  #   SimplifyLibCalls \
+  #   StripDeadPrototypes \
+  #   TailCallElimination
+  # do
+  #   echo "=============================================="
+  #   echo "with optimization flag "${OPT}
+  #   echo "=============================================="
+  #   ./run-a-test.sh $1 optimize ${OPT}
+  #   klee-stats --print-all ../klee-last
+
+  #   cd ../../../obj-gcov/src/
+  #   rm -rf *.gcda
+  #   klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
+  #   gcov -b -c $1
+  #   cd ../../obj-llvm/src/klee-test
+
+  # done
+
+  # with selected opt-flag
   for OPT in \
-    AggressiveDCE \
-    ArgumentPromotion \
-    CFGSimplification \
-    CondPropagation \
-    ConstantMerge \
-    DeadArgElimination \
-    DeadStoreElimination \
-    DeadTypeElimination \
-    FunctionAttrs \
-    FunctionInlining \
-    GlobalDCE \
-    GlobalOptimizer \
-    GVN \
     IndVarSimplify \
     InstructionCombining \
-    IPConstantPropagation \
-    JumpThreading \
-    LICM \
-    LoopDeletion \
-    LoopIndexSplit \
     LoopRotate \
-    LoopUnroll \
-    LoopUnswitch \
-    MemCpyOpt \
     PromoteMemoryToRegister \
-    PruneEH \
-    RaiseAllocation \
-    Reassociate \
-    ScalarReplAggregates \
-    SCCP \
-    SimplifyLibCalls \
-    StripDeadPrototypes \
-    TailCallElimination
+    ScalarReplAggregates
   do
     echo "=============================================="
     echo "with optimization flag "${OPT}

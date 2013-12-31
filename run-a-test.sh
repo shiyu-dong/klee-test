@@ -29,7 +29,7 @@ CMD="$CMD --simplify-sym-indices \
   --max-sym-array-size=4096 \
   --max-instruction-time=30. \
   --watchdog \
-  --max-time=300. \
+  --max-time=600. \
   --max-memory-inhibit=false \
   --max-static-fork-pct=1 \
   --max-static-solve-pct=1 \
