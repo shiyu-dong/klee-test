@@ -1,9 +1,11 @@
 # $1: program name
 # $2: optimize (or null)
 # $3: opt-flag (or null)
+# $4: solver (or null)
+# $5: time (or null, 600 by default)
 
 CMD=""
-if [ "$3" != "" ]
+if [ "$3" != "null" ]
 then
   CMD="$CMD klee-flag "
 else
@@ -40,9 +42,9 @@ CMD="$CMD --simplify-sym-indices \
   --use-batching-search \
   --batch-instructions=10000"
 
-if [ "$2" != "" ]; then
+if [ "$2" != "null" ]; then
   CMD="$CMD --$2"
-  if [ "$3" != "" ]; then
+  if [ "$3" != "null" ]; then
     CMD="$CMD --opt-flag=$3"
   fi
 fi

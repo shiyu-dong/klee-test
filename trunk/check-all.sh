@@ -1,17 +1,22 @@
 #!/bin/bash
-#PROGRAMS="csplit date expand factor fold join tr seq pr mknod"
-PROGRAMS="base64 cut dd du expand fold mknod tr tsort unexpand \
-  basename chcon cksum comm dircolors dirname env \
-  expr groups link logname mkdir mkfifo nice nl wc unlink \
-  touch tee sync sum split sleep setuidgid rmdir readlink \
-  printf pathchk paste od"
+PROGRAMS="base64 basename chcon cksum comm cut dd dircolors dirname \
+du env expand expr fold groups link logname mkdir mkfifo mknod nice nl \
+od paste pathchk printf readlink rmdir setuidgid sleep split sum \
+sync tee touch tr tsort unexpand unlink wc"
+
+MUTATION="base64 basename chcon chgrp cksum comm cut dd dircolors dirname \
+du env expand expr fold groups link logname mkdir mkfifo mknod nice nl \
+od paste pathchk printf readlink rmdir setuidgid sleep split sum \
+sync tee touch tr tsort unexpand unlink wc"
+
+SOLVER="[ base64 chmod comm csplit dircolors echo env factor join ln mkfifo"
 
 if [ "$1" == "--clean" ]
 then
   ./compare-all.sh --clean
 else
   if [ ! -d "test_result_new" ]; then
-    mkdir test_result_new
+    mkdir test_result_new 
   fi
   for program in $PROGRAMS
   do
