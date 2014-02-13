@@ -24,7 +24,7 @@ else
     #for solver in stp z3 btor
     for solver in stp
     do
-      ./compare-all.sh $program 10 $solver &> test_result_new/result_${program}_${solver}.txt
+      ./compare-all.sh $program 1200 $solver &> test_result_new/result_${program}_${solver}.txt
     done
   done
 fi
