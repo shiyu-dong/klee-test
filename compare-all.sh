@@ -88,11 +88,11 @@ then
   ./run-a-test.sh $1 $2 $3 none none
   klee-stats --print-all ../klee-last
 
-  #cd ../../../obj-gcov/src/
-  #rm -rf *.gcda
-  #klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-  #gcov -b -c $1
-  #cd ../../obj-llvm/src/klee-test
+  cd ../../../obj-gcov/src/
+  rm -rf *.gcda
+  klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-no-opt/*.ktest
+  gcov -b -c $1
+  cd ../../obj-llvm/src/klee-test
 
   # with original klee optimization
   echo "=============================================="
@@ -101,11 +101,11 @@ then
   ./run-a-test.sh $1 $2 $3 optimize none
   klee-stats --print-all ../klee-last
 
-  #cd ../../../obj-gcov/src/
-  #rm -rf *.gcda
-  #klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-  #gcov -b -c $1
-  #cd ../../obj-llvm/src/klee-test
+  cd ../../../obj-gcov/src/
+  rm -rf *.gcda
+  klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-original/*.ktest
+  gcov -b -c $1
+  cd ../../obj-llvm/src/klee-test
 
   # with selected opt-flag
   for OPT in \
@@ -121,10 +121,10 @@ then
     ./run-a-test.sh $1 $2 $3 optimize ${OPT}
     klee-stats --print-all ../klee-last
 
-    #cd ../../../obj-gcov/src/
-    #rm -rf *.gcda
-    #klee-replay $1 ../../obj-llvm/src/klee-last/*.ktest
-    #gcov -b -c $1
-    #cd ../../obj-llvm/src/klee-test
+    cd ../../../obj-gcov/src/
+    rm -rf *.gcda
+    klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-${OPT}/*.ktest
+    gcov -b -c $1
+    cd ../../obj-llvm/src/klee-test
   done
 fi
