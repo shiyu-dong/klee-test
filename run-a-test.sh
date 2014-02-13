@@ -19,20 +19,19 @@ CMD="$CMD --simplify-sym-indices \
   --max-memory=1000 \
   --disable-inlining \
   --use-forked-solver \
-  --use-cache=false \
-  --use-cex-cache=false \
   --libc=uclibc \
   --posix-runtime \
   --dump-states-on-halt=false \
   --allow-external-sym-calls \
   --only-output-states-covering-new \
+  --use-cache=false \
+  --use-cex-cache=false \
   --environ=../test.env \
   --run-in=/tmp/sandbox \
   --max-sym-array-size=4096 \
   --max-instruction-time=30. \
   --watchdog \
   --max-time=$2. \
-  --use-metasmt=$3 \
   --max-memory-inhibit=false \
   --max-static-fork-pct=1 \
   --max-static-solve-pct=1 \
@@ -49,9 +48,27 @@ if [ "$4" != "none" ]; then
     CMD="$CMD --opt-flag=$5"
   fi
 fi
+
+CMD="$CMD --output-dir="
+if [ "$4" != "none" ]; then
+  if [ "$5" != "none" ]; then
+    CMD="$CMD../klee-mutation-$1-$5"
+  else
+    CMD="$CMD../klee-mutation-$1-original"
+  fi
+else
+  CMD="$CMD../klee-mutation-$1-no-opt"
+fi
+
+#CMD="$CMD ../$1.bc \
+#  --sym-args 0 3 10 \
+#  --sym-files 2 8 \
+#  --sym-stdout"
+
 CMD="$CMD ../$1.bc \
-  --sym-args 0 3 10 \
-  --sym-files 2 8 \
+  --sym-args 0 1 10 \
+  --sym-args 0 2 2 \
+  --sym-files 1 8 \
   --sym-stdout"
 
 echo $CMD
@@ -65,6 +82,13 @@ ${CMD}
 # --search=random-path \
 # --search=nurs:covnew \
 
+## Multi solver
+#  --use-metasmt=$3 \
+
+## Disable cache
+#  --use-cache=false \
+#  --use-cex-cache=false \
+
 ## Old arguments
 #CMD="$CMD ../$1.bc \
 #  --sym-args 0 1 10 \
@@ -72,14 +96,8 @@ ${CMD}
 #  --sym-files 1 8 \
 #  --sym-stdout"
 
-#  --output-dir="
-#  if [ "$2" != "" ]; then
-#    if [ "$3" != "" ]; then
-#      CMD="$CMD../klee-out-$1-flag"
-#    else
-#      CMD="$CMD../klee-out-$1-original"
-#    fi
-#  else
-#    CMD="$CMD../klee-out-$1-no-opt"
-#  fi
-#  CMD="$CMD \
+## New arguments
+#CMD="$CMD ../$1.bc \
+#  --sym-args 0 3 10 \
+#  --sym-files 2 8 \
+#  --sym-stdout"
