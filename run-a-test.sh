@@ -7,9 +7,11 @@
 CMD=""
 if [ "$4" != "none" ]
 then
-  CMD="$CMD klee-flag "
-else
-  CMD="$CMD klee-original "
+  if ["$5" != "none"]
+    CMD="$CMD klee-flag "
+  else
+    CMD="$CMD klee-original "
+  fi
 fi
 
 CMD="$CMD --simplify-sym-indices \

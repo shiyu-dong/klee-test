@@ -4,8 +4,13 @@ import sys
 import os
 import csv
 
-Solvers = ["stp", "z3", "btor"]
-Programs = ["base64","chmod","comm","csplit","dircolors","echo","env","factor","join","ln","mkfifo"]
+#Solvers = ["stp", "z3", "btor"]
+Solvers = ["stp"]
+#Programs = ["base64","chmod","comm","csplit","dircolors","echo","env","factor","join","ln","mkfifo"]
+Programs = ["base64", "basename", "chcon", "chgrp", "cksum", "comm", "cut","dd","dircolors","dirname", \
+    "du", "env", "expand", "expr", "fold", "groups", "link", "logname", "mkdir", "mkfifo", "mknod", "nice", "nl", \
+    "od", "paste", "pathchk", "printf", "readlink", "rmdir", "setuidgid", "sleep", "split", "sum", \
+    "sync", "tee", "touch", "tr", "tsort", "unexpand", "unlink", "wc"]
 
 if not os.path.exists("csv"):
   os.makedirs("csv")
