@@ -7,7 +7,8 @@
 CMD=""
 if [ "$4" != "none" ]
 then
-  if ["$5" != "none"]
+  if [ "$5" != "none" ]
+  then
     CMD="$CMD klee-flag "
   else
     CMD="$CMD klee-original "
@@ -28,6 +29,7 @@ CMD="$CMD --simplify-sym-indices \
   --only-output-states-covering-new \
   --use-cache=false \
   --use-cex-cache=false \
+  --use-metasmt=$3 \
   --environ=../test.env \
   --run-in=/tmp/sandbox \
   --max-sym-array-size=4096 \
@@ -54,12 +56,12 @@ fi
 CMD="$CMD --output-dir="
 if [ "$4" != "none" ]; then
   if [ "$5" != "none" ]; then
-    CMD="$CMD../klee-mutation-$1-$5"
+    CMD="$CMD../klee-mutation-$1-$3-$5"
   else
-    CMD="$CMD../klee-mutation-$1-original"
+    CMD="$CMD../klee-mutation-$1-$3-original"
   fi
 else
-  CMD="$CMD../klee-mutation-$1-no-opt"
+  CMD="$CMD../klee-mutation-$1-$3-no-opt"
 fi
 
 #CMD="$CMD ../$1.bc \

@@ -81,18 +81,18 @@ FLAG6="\
 rm -rf ../klee-out-* ../klee-last
 if [ "$1" != "--clean" ]
 then
-  # without optimization
-  echo "=============================================="
-  echo "no optimization"
-  echo "=============================================="
-  ./run-a-test.sh $1 $2 $3 none none
-  klee-stats --print-all ../klee-last
+  ## without optimization
+  #echo "=============================================="
+  #echo "no optimization"
+  #echo "=============================================="
+  #./run-a-test.sh $1 $2 $3 none none
+  #klee-stats --print-all ../klee-last
 
-  cd ../../../obj-gcov/src/
-  rm -rf *.gcda
-  klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-no-opt/*.ktest
-  gcov -b -c $1
-  cd ../../obj-llvm/src/klee-test
+  #cd ../../../obj-gcov/src/
+  #rm -rf *.gcda
+  #klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-$3-no-opt/*.ktest
+  #gcov -b -c $1
+  #cd ../../obj-llvm/src/klee-test
 
   # with original klee optimization
   echo "=============================================="
@@ -103,28 +103,28 @@ then
 
   cd ../../../obj-gcov/src/
   rm -rf *.gcda
-  klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-original/*.ktest
+  klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-$3-original/*.ktest
   gcov -b -c $1
   cd ../../obj-llvm/src/klee-test
 
-  # with selected opt-flag
-  for OPT in \
-    IndVarSimplify \
-    InstructionCombining \
-    LoopRotate \
-    PromoteMemoryToRegister \
-    ScalarReplAggregates
-  do
-    echo "=============================================="
-    echo "with optimization flag "${OPT}
-    echo "=============================================="
-    ./run-a-test.sh $1 $2 $3 optimize ${OPT}
-    klee-stats --print-all ../klee-last
+  ## with selected opt-flag
+  #for OPT in \
+  #  IndVarSimplify \
+  #  InstructionCombining \
+  #  LoopRotate \
+  #  PromoteMemoryToRegister \
+  #  ScalarReplAggregates
+  #do
+  #  echo "=============================================="
+  #  echo "with optimization flag "${OPT}
+  #  echo "=============================================="
+  #  ./run-a-test.sh $1 $2 $3 optimize ${OPT}
+  #  klee-stats --print-all ../klee-last
 
-    cd ../../../obj-gcov/src/
-    rm -rf *.gcda
-    klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-${OPT}/*.ktest
-    gcov -b -c $1
-    cd ../../obj-llvm/src/klee-test
-  done
+  #  cd ../../../obj-gcov/src/
+  #  rm -rf *.gcda
+  #  klee-replay $1 ../../obj-llvm/src/klee-mutation-$1-$3-${OPT}/*.ktest
+  #  gcov -b -c $1
+  #  cd ../../obj-llvm/src/klee-test
+  #done
 fi

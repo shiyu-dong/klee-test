@@ -19,10 +19,10 @@ else
   if [ ! -d "test_result_new" ]; then
     mkdir test_result_new
   fi
-  for program in $MUTATION
+  for program in $SOLVER
   do
-    #for solver in stp z3 btor
-    for solver in stp
+    for solver in stp z3 btor
+    #for solver in stp
     do
       ./compare-all.sh $program 1200 $solver &> test_result_new/result_${program}_${solver}.txt
     done
