@@ -21,14 +21,14 @@ CMD="$CMD --simplify-sym-indices \
   --output-module \
   --max-memory=1000 \
   --disable-inlining \
+  --use-cache=false \
+  --use-cex-cache=false \
   --use-forked-solver \
   --libc=uclibc \
   --posix-runtime \
   --dump-states-on-halt=false \
   --allow-external-sym-calls \
   --only-output-states-covering-new \
-  --use-cache=false \
-  --use-cex-cache=false \
   --use-metasmt=$3 \
   --environ=../test.env \
   --run-in=/tmp/sandbox \
@@ -78,6 +78,7 @@ CMD="$CMD ../$1.bc \
 echo $CMD
 ${CMD}
 
+
 # --max-forks=10 \
 # --stop-after-n-tests=10 \
 # --no-output \
@@ -86,8 +87,6 @@ ${CMD}
 # --search=random-path \
 # --search=nurs:covnew \
 
-## Multi solver
-#  --use-metasmt=$3 \
 
 ## Disable cache
 #  --use-cache=false \
