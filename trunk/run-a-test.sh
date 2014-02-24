@@ -13,6 +13,8 @@ then
   else
     CMD="$CMD klee-original "
   fi
+else
+  CMD="$CMD klee-original "
 fi
 
 CMD="$CMD --simplify-sym-indices \
@@ -21,8 +23,6 @@ CMD="$CMD --simplify-sym-indices \
   --output-module \
   --max-memory=1000 \
   --disable-inlining \
-  --use-cache=false \
-  --use-cex-cache=false \
   --use-forked-solver \
   --libc=uclibc \
   --posix-runtime \
@@ -87,6 +87,8 @@ ${CMD}
 # --search=random-path \
 # --search=nurs:covnew \
 
+## Multi-solver support
+#  --use-metasmt=$3 \
 
 ## Disable cache
 #  --use-cache=false \
